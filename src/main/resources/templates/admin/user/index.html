@@ -71,7 +71,7 @@
 					<span th:if="${user.gender == 0}">Male</span> 
 					<span th:unless="${user.gender == 0}">Female</span>
 				</td>
-				<td><img style="border-radius: 50%" width="50"  height="50" th:src="@{'/images/' + ${user.image}}"/></td>
+				<td><img style="border-radius: 50%" width="50"  height="50" th:src="@{'/getimage/' + ${user.image}}"/></td>
 				<td th:text="${user.roles.roleName}"></td>
 				<td>
 					<a th:href="@{/admin/user/detail?userID={userID}(userID=${user.userID})}" class="btn btn-primary">Detail</a> 

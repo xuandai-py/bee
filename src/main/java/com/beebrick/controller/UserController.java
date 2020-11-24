@@ -1,6 +1,11 @@
 package com.beebrick.controller;
 
 import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,12 +92,23 @@ public class UserController {
 		if (bindingResult.hasErrors()) {
 			return "admin/user/add";
 		} else {
-			File file = upload.save(photo, "/static/images/");
-			System.out.println(file);
-			if(file != null) {
-				user.setImage(file.getName());
+//			File file = upload.save(photo, "/static/images/");
+//			System.out.println(file);
+//			if(file != null) {
+//				user.setImage(file.getName());
+//			}
+			Path path = Paths.get("uploads/");
+			try {
+				InputStream inputStream = photo.getInputStream();
+				Files.copy(inputStream, path.resolve(photo.getOriginalFilename()),
+						StandardCopyOption.REPLACE_EXISTING);
+				user.setImage(photo.getOriginalFilename().toLowerCase());
+				userService.saveUser(user);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			userService.saveUser(user);
+			
 			return "redirect:/admin/user/page/1";
 		}
 	}

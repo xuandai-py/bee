@@ -23,8 +23,8 @@
 				<div class="card-body">
 					<div>
 			            <label th:text="CategoryName" th:for="categoryName"></label>
-			            <input type="text" th:field="*{categoryName}" class="form-control"/>
-			           	<textarea rows="" cols="" id="content" name="content" style="width: 820px; height: 175px"></textarea>
+			            <input type="text"  class="form-control"/>
+			           	<textarea rows="" cols="" id="content" name="content" style="width: 820px; height: 175px" th:field="*{categoryName}"></textarea>
 			        </div>
 			        <div style="clear: both; display: block; height: 10px"></div>
 			        
