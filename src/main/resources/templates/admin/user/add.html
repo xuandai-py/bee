@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Add User</title>
+	<link type="text/css" rel="stylesheet" href="../../bootstrap.min.css"/>
+	<style>
+		.error{
+			color: red;
+		}
+		
+		img#photo{
+		max-width: 190px;
+		height: 205px;
+		border: 1px solid blue;
+		border-radius: 5px;
+		margin-bottom: 10px;
+		padding: 5px;
+	}
+	</style>
+</head>
+<body>
+	<div class="container col-6">
+		<div class="card">
+			<div class="card-header">
+				<h2 style="text-align: center;">ADD NEW USER</h2>
+			</div>
+			<form th:object="${user}" th:action="@{/admin/user/save}" action="#" method="post" enctype="multipart/form-data">
+				<div class="card-body">
+					<div>
+			            <label th:text="Username" th:for="username"></label>
+			            <input type="text" th:field="*{username}" class="form-control"/>
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+			        <div>
+			            <label th:text="Password" th:for="password"></label>
+			            <input type="text" th:field="*{password}" class="form-control"/>
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+			        <div>
+			            <label th:text="Fullname" th:for="fullname"></label>
+			            <input type="text" th:field="*{fullname}" class="form-control"/>
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+			        <div>
+			            <label th:text="Birthday" th:for="birthday"></label>
+			            <input type="date" th:field="*{birthday}" class="form-control"/>
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+			        <div>
+			            <label th:text="Address" th:for="address"></label>
+			            <input type="text" th:field="*{address}" class="form-control"/>
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+			        <div>
+			            <label th:text="Email" th:for="email"></label>
+			            <input type="text" th:field="*{email}" class="form-control"/>
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+					<div>
+			            <label th:text="Phone" th:for="phone"></label>
+			            <input type="text" th:field="*{phone}" class="form-control"/>
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+			        <div>
+			            <label th:text="Gender" th:for="gender"></label>
+			            <select th:field="*{gender}" class="form-control">
+							<option value="0">Male</option>
+							<option value="1">Female</option>
+						</select>
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+			        <div>
+			            <label th:text="Image" th:for="image"></label>
+			            <input type="file" class="form-control" name="photo_file" id="photo_file"/>
+			            <input type="hidden" th:field="*{image}"/>
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+					<div>
+						<label th:text="Role" th:for="role"></label> 
+						<select th:field="*{roles.roleID}" class="form-control">
+							<option value=""></option>
+							<option th:each="role : ${roles}" th:text="${role.roleName}" th:value="${role.roleID}" />
+						</select>
+					</div>
+				</div>
+				<div class="card-footer">
+					<input type="submit" class="btn btn-success" value="Save" />
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- <script src="/static/upload.js"></script> -->
+</body>
+</html>
