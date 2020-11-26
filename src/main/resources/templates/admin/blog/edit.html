@@ -13,18 +13,19 @@
 			<div class="card-header">
 				<h2 style="text-align: center;">Edit User</h2>
 			</div>
-		    <form th:object="${category}" th:action="@{/admin/category/update}" action="#" method="post">
+		    <form th:object="${blog}" th:action="@{/admin/blog/update}" action="#" method="post">
 				<div class="card-body">
-					<input type="hidden" th:field="*{categoryID}">
+					<input type="hidden" th:field="*{blogID}">
 					<div>
-			            <label th:text="CategoryName" th:for="categoryName"></label>
-			            <input type="text" th:field="*{categoryName}" class="form-control"/>
+			            <label th:text="Title" th:for="title"></label>
+			            <input type="text" th:field="*{title}" class="form-control"/>
 			        </div>
 			        <div style="clear: both; display: block; height: 10px"></div>
 			        <div>
-			            <label th:text="Description" th:for="description"></label>
-			            <textarea th:field="*{description}" style="width: 620px; height: 175px" ></textarea>
+			            <label th:text="Content" th:for="content"></label>
+			            <textarea rows="" cols="" id="content" name="content" style="width: 820px; height: 175px" th:field="*{content}"></textarea>
 			        </div>
+
 				</div>
 				<div class="card-footer">
 					<input type="submit" class="btn btn-success" value="Save" />
@@ -32,6 +33,11 @@
 			</form>
 		</div>
 	</div>
-	
+	<script type="text/javascript">
+		var editor = '';
+		$(document).ready(function() {
+			editor = CKEDITOR.replace('content');
+		});
+	</script>
 </body>
 </html>

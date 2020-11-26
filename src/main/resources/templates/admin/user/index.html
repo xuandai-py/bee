@@ -74,7 +74,6 @@
 				<td><img style="border-radius: 50%" width="50"  height="50" th:src="@{'/getimage/' + ${user.image}}"/></td>
 				<td th:text="${user.roles.roleName}"></td>
 				<td>
-					<a th:href="@{/admin/user/detail?userID={userID}(userID=${user.userID})}" class="btn btn-primary">Detail</a> 
 					<a th:href="@{/admin/user/edit?userID={userID}(userID=${user.userID})}" class="btn btn-primary">Edit</a> 
 					<a th:href="@{/admin/user/delete?userID={userID}(userID=${user.userID})}" class="btn btn-danger">Delete</a>
 				</td>

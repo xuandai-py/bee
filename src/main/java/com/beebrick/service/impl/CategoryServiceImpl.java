@@ -19,24 +19,22 @@ public class CategoryServiceImpl implements CategoryService {
 	private CategoryRepository categoryRepository;
 
 	@Override
-	public List<Category> getAllCategory() {
+	public List<Category> findAll() {
 		return categoryRepository.findAll();
 	}
 
 	@Override
-	public void saveCategory(Category category) {
+	public void save(Category category) {
 		categoryRepository.save(category);
-		
 	}
 
 	@Override
-	public void deleteCategory(Integer categoryID) {
-		categoryRepository.deleteById(categoryID);
-		
+	public void delete(Integer categoryID) {
+		categoryRepository.delete(categoryID);
 	}
 
 	@Override
-	public Optional<Category> findSupplierById(Integer categoryID) {
+	public Optional<Category> findById(Integer categoryID) {
 		return categoryRepository.findById(categoryID);
 	}
 
@@ -46,11 +44,4 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryRepository.getAllCategory(pageable);
 	}
 
-	@Override
-	public Page<Category> findPaginated1(String categoryName, int pageNo, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 }

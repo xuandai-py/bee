@@ -8,13 +8,11 @@ import com.beebrick.entity.Product;
 
 public interface ProductService {
 
-	void saveProduct(Product product);
+	void save(Product product);
 	
-	void deleteProduct(Integer productID);
+	void delete(Integer productID);
 
-	Optional<Product> findProductById(Integer productID);
+	Optional<Product> findById(Integer productID);
 
 	Page<Product> findPaginated(int pageNo, int pageSize);
-
-	Page<Product> findPaginated1(String productName, int pageNo, int pageSize);
 }

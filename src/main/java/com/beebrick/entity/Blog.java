@@ -7,9 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "blog")
@@ -20,24 +21,28 @@ public class Blog {
 	@Column(name = "BlogID")
 	private Integer blogID;
 	
-	@Column(name = "Content")
+	@Column(name = "Title")
+	private String title;
+	
+	@Column(name = "Content", length = 7000)
 	private String content;
 	
-	@Column(name = "CreatedDate")
+	@Column(name = "IsActive")
+	private boolean isActive;
+	
+	@Column(name = "CreatedDate", updatable = false)
+	@CreationTimestamp
 	private LocalDateTime createdDate;
 	
 	@Column(name = "ModifiedDate")
+	@UpdateTimestamp
 	private LocalDateTime modifiedDate;
 	
-	@Column(name = "CreatedBy")
+	@Column(name = "CreatedBy", updatable = false)
 	private String createdBy;
 	
 	@Column(name = "ModifiedBy")
 	private String modifiedBy;
-	
-	@ManyToOne
-	@JoinColumn(name = "UserID")
-	private User users;
 
 	public Integer getBlogID() {
 		return blogID;
@@ -47,12 +52,28 @@ public class Blog {
 		this.blogID = blogID;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public String getContent() {
 		return content;
 	}
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	public LocalDateTime getCreatedDate() {
@@ -85,13 +106,5 @@ public class Blog {
 
 	public void setModifiedBy(String modifiedBy) {
 		this.modifiedBy = modifiedBy;
-	}
-
-	public User getUsers() {
-		return users;
-	}
-
-	public void setUsers(User users) {
-		this.users = users;
 	}
 }

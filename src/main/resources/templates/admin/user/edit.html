@@ -11,7 +11,7 @@
 			<div class="card-header">
 				<h2 style="text-align: center;">Edit User</h2>
 			</div>
-		    <form th:object="${user}" th:action="@{/admin/user/save}" action="#" method="post">
+		    <form th:object="${user}" th:action="@{/admin/user/update}" action="#" method="post" enctype="multipart/form-data">
 		    	<div class="card-body">
 			        <input type="hidden" th:field="*{userID}">
 			        <div>
@@ -58,8 +58,10 @@
 			        </div>
 			        <div style="clear: both; display: block; height: 10px"></div>
 			        <div>
-			            <label th:text="Image" th:for="image"></label>
-			            <input type="file" th:field="*{image}" class="form-control"/>
+			            <label th:text="Image" th:for="photo_file"></label>
+			            <img id="photo" style="border-radius: 50%" width="50"  height="50" th:src="@{'/getimage/' + ${user.image}}"/>
+			            <input type="file" class="form-control" name="photo_file" id="photo_file"/>
+			            <input type="hidden" th:field="*{image}"/>
 			        </div>
 			        <div style="clear: both; display: block; height: 10px"></div>
 					<div>
@@ -76,5 +78,23 @@
 		    </form>
 		</div>
 	</div>
+	 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	 <script>
+	 function readURL(input) {
+	        if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+	            
+	            reader.onload = function (e) {
+	                $('#photo').attr('src', e.target.result);
+	            }
+	            
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
+	    
+	    $("#photo_file").change(function(){
+	        readURL(this);
+	    });
+	 </script>
 </body>
 </html>

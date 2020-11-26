@@ -8,16 +8,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.beebrick.entity.Product;
+import com.beebrick.entity.Blog;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface BlogRepository extends JpaRepository<Blog, Integer>{
 	
-	@Query(value = "SELECT * FROM product WHERE IsActive = 0", nativeQuery = true)
-	public Page<Product> getAllProduct(Pageable pageable);
+	@Query(value = "SELECT * FROM blog WHERE IsActive = 0", nativeQuery = true)
+	public Page<Blog> getAllBlog(Pageable pageable);
 	
 	@Modifying
 	@Transactional
-	@Query(value = "UPDATE product SET IsActive = 1 WHERE ProductID=?1", nativeQuery = true)
-	void delete(Integer productID);
+	@Query(value = "UPDATE blog SET IsActive = 1 WHERE BlogID=?1", nativeQuery = true)
+	void delete(Integer blogID);
 }

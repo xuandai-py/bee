@@ -30,6 +30,9 @@ public class OrderDetail {
 	
 	@Column(name = "Price")
 	private double price;
+	
+	@Column(name = "SubTotal")
+	private double subTotal;
 
 	public OrderDetailID getOrderDetailID() {
 		return orderDetailID;
@@ -70,6 +73,12 @@ public class OrderDetail {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
-	
+
+	public double getSubTotal() {
+		return subTotal;
+	}
+
+	public void setSubTotal(double subTotal) {
+		this.subTotal = subTotal;
+	}
 }

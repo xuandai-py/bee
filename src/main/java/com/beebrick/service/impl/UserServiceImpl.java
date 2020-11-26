@@ -1,6 +1,5 @@
 package com.beebrick.service.impl;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,33 +18,31 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
 	@Override
-	public void saveUser(User user) {
+	public void save(User user) {
 		userRepository.save(user);
 	}
 
 	@Override
-	public void deleteUser(Integer userID) {
-		userRepository.deleteUser(userID);
+	public void delete(Integer userID) {
+		userRepository.delete(userID);
 	}
 
 	@Override
-	public Optional<User> findUserById(Integer userID) {
+	public Optional<User> findById(Integer userID) {
 		return userRepository.findById(userID);
 	}
 
 	@Override
 	public Page<User> findPaginated(int pageNo, int pageSize) {
 		PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
-		return this.userRepository.getAllUser(pageable);
-	}
-
-	@Override
-	public List<User> listAll(String keyword) {
-		return userRepository.search1(keyword);
+		return userRepository.getAllUser(pageable);
 	}
 
 	@Override
 	public Page<User> findPaginated1(String username, int pageNo, int pageSize) {
-		return userRepository.searchUser(username, PageRequest.of(pageNo - 1, pageSize));
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	
 }

@@ -15,16 +15,25 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name = "category")
-public class Category {
+@Table(name = "manufacturer")
+public class Manufacturer {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "CategoryID")
-	private Integer categoryID;
+	@Column(name = "ManufacturerID")
+	private Integer manufacturerID;
 	
-	@Column(name = "CategoryName")
-	private String categoryName;
+	@Column(name = "ManufacturerName")
+	private String manufacturerName;
+	
+	@Column(name = "ManufacturerAddress")
+	private String manufacturerAddress;
+	
+	@Column(name = "ManufacturerEmail")
+	private String manufacturerEmail;
+	
+	@Column(name = "ManufacturerPhone")
+	private String manufacturerPhone;
 	
 	@Column(name = "Description", length = 2000)
 	private String description;
@@ -46,23 +55,47 @@ public class Category {
 	@Column(name = "ModifiedBy")
 	private String modifiedBy;
 	
-	@OneToMany(mappedBy = "category")
+	@OneToMany(mappedBy = "manufacturer")
 	private List<Product> product;
 
-	public Integer getCategoryID() {
-		return categoryID;
+	public Integer getManufacturerID() {
+		return manufacturerID;
 	}
 
-	public void setCategoryID(Integer categoryID) {
-		this.categoryID = categoryID;
+	public void setManufacturerID(Integer manufacturerID) {
+		this.manufacturerID = manufacturerID;
 	}
 
-	public String getCategoryName() {
-		return categoryName;
+	public String getManufacturerName() {
+		return manufacturerName;
 	}
 
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
+	public void setManufacturerName(String manufacturerName) {
+		this.manufacturerName = manufacturerName;
+	}
+
+	public String getManufacturerAddress() {
+		return manufacturerAddress;
+	}
+
+	public void setManufacturerAddress(String manufacturerAddress) {
+		this.manufacturerAddress = manufacturerAddress;
+	}
+
+	public String getManufacturerEmail() {
+		return manufacturerEmail;
+	}
+
+	public void setManufacturerEmail(String manufacturerEmail) {
+		this.manufacturerEmail = manufacturerEmail;
+	}
+
+	public String getManufacturerPhone() {
+		return manufacturerPhone;
+	}
+
+	public void setManufacturerPhone(String manufacturerPhone) {
+		this.manufacturerPhone = manufacturerPhone;
 	}
 
 	public String getDescription() {

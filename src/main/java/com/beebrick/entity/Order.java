@@ -4,10 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -60,7 +58,7 @@ public class Order {
 	@OneToMany(mappedBy = "OrderID")
 	Set<OrderDetail> orderDetail;
 
-	@OneToMany(mappedBy = "orders", fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, orphanRemoval = true)
+	@OneToMany(mappedBy = "orders")
 	private List<Shipment> shipment;
 
 	public Integer getOrderID() {

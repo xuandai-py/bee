@@ -26,8 +26,8 @@ public class Shipment {
 	@Column(name = "ShipmentDate")
 	private LocalDateTime shipmentDate;
 	
-	@Column(name = "Note")
-	private String note;
+	@Column(name = "Description", length = 2000)
+	private String description;
 	
 	@Column(name = "ShipmentContact")
 	private String shipmentContact;
@@ -60,12 +60,12 @@ public class Shipment {
 		this.shipmentDate = shipmentDate;
 	}
 
-	public String getNote() {
-		return note;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setNote(String note) {
-		this.note = note;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getShipmentContact() {

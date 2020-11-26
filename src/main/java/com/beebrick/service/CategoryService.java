@@ -8,16 +8,14 @@ import org.springframework.data.domain.Page;
 import com.beebrick.entity.Category;
 
 public interface CategoryService {
-	List<Category> getAllCategory();
+	
+	List<Category> findAll();
 
-	void saveCategory(Category category);
+	void save(Category category);
 
-	void deleteCategory(Integer categoryID);
+	void delete(Integer categoryID);
 
-	Optional<Category> findSupplierById(Integer categoryID);
+	Optional<Category> findById(Integer categoryID);
 
 	Page<Category> findPaginated(int pageNo, int pageSize);
-
-	Page<Category> findPaginated1(String categoryName, int pageNo, int pageSize);
-
 }

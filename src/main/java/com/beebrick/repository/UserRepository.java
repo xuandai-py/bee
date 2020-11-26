@@ -15,17 +15,17 @@ import com.beebrick.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 	
-	@Query(value = "SELECT * FROM users WHERE Status = 0", nativeQuery = true)
+	@Query(value = "SELECT * FROM users WHERE IsActive = 0", nativeQuery = true)
 	public Page<User> getAllUser(Pageable pageable);
 	
 	@Modifying
 	@Transactional
-	@Query(value = "UPDATE users SET Status = 1 WHERE UserID=?1", nativeQuery = true)
-	void deleteUser(Integer userID);
+	@Query(value = "UPDATE users SET IsActive = 1 WHERE UserID=?1", nativeQuery = true)
+	void delete(Integer userID);
 	
-	@Query(value = "SELECT * FROM users WHERE Username LIKE %?1% and Status = 0", nativeQuery = true)
+	@Query(value = "SELECT * FROM users WHERE Username LIKE %?1% and IsActive = 0", nativeQuery = true)
 	public Page<User> searchUser(String username, Pageable pageable);
 	
-	@Query(value = "SELECT * FROM users WHERE Username LIKE %?1% and Status = 0", nativeQuery = true)
+	@Query(value = "SELECT * FROM users WHERE Username LIKE %?1% and IsActive = 0", nativeQuery = true)
 	public List<User> search1(String pageable);
 }

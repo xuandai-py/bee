@@ -11,7 +11,7 @@
 			<div class="card-header">
 				<h2 style="text-align: center;">Edit User</h2>
 			</div>
-		    <form th:object="${product}" th:action="@{/admin/product/save}" action="#" method="post">
+		    <form th:object="${product}" th:action="@{/admin/product/update}" action="#" method="post" enctype="multipart/form-data">
 				<div class="card-body">
 					<input type="hidden" th:field="*{productID}">
 					<div>
@@ -20,8 +20,10 @@
 			        </div>
 			        <div style="clear: both; display: block; height: 10px"></div>
 			        <div>
-			            <label th:text="Image" th:for="image"></label>
-			            <input type="file" th:field="*{image}" class="form-control" />
+			            <label th:text="Image" th:for="photo_file"></label>
+			            <img id="photo" style="border-radius: 50%" width="50"  height="50" th:src="@{'/getimage/' + ${product.image}}"/>
+			            <input type="file" class="form-control" name="photo_file" id="photo_file"/>
+			            <input type="hidden" th:field="*{image}"/>
 			        </div>
 			        <div style="clear: both; display: block; height: 10px"></div>
 			        <div>
@@ -49,10 +51,10 @@
 					</div>
 					<div style="clear: both; display: block; height: 10px"></div>
 					<div>
-						<label th:text="SupplierName" th:for="supplier.supplierID"></label> 
-						<select th:field="*{supplier.supplierID}" class="form-control">
+						<label th:text="ManufacturerName" th:for="manufacturer.manufacturerID"></label> 
+						<select th:field="*{manufacturer.manufacturerID}" class="form-control">
 							<option value=""></option>
-							<option th:each="supplier : ${suppliers}" th:text="${supplier.supplierName}" th:value="${supplier.supplierID}" />
+							<option th:each="manufacturer : ${manufacturers}" th:text="${manufacturer.manufacturerName}" th:value="${manufacturer.manufacturerID}" />
 						</select>
 					</div>
 				</div>

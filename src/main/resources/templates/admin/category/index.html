@@ -46,13 +46,14 @@
 				<th>No.</th>
 				<th>CategoryID</th>
 				<th>CategoryName</th>
+				<th>Description</th>
 				<th>Actions</th>
 			</tr>
 			<tr th:each="category,iterStat  : ${categories}">
 				<td th:text="${iterStat.count}"></td>
 				<td th:text="${category.categoryID}"></td>
 				<td th:text="${category.categoryName}"></td>
-				
+				<td th:text="${category.description}"></td>
 				
 				<td>
 					<a th:href="@{/admin/category/edit?categoryID={categoryID}(categoryID=${category.categoryID})}" class="btn btn-primary">Edit</a> 

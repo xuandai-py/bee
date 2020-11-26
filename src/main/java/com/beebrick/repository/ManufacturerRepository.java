@@ -8,16 +8,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.beebrick.entity.Product;
+import com.beebrick.entity.Manufacturer;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface ManufacturerRepository extends JpaRepository<Manufacturer, Integer>{
 	
-	@Query(value = "SELECT * FROM product WHERE IsActive = 0", nativeQuery = true)
-	public Page<Product> getAllProduct(Pageable pageable);
+	@Query(value = "SELECT * FROM manufacturer WHERE IsActive = 0", nativeQuery = true)
+	public Page<Manufacturer> getAllManufacturer(Pageable pageable);
 	
 	@Modifying
 	@Transactional
-	@Query(value = "UPDATE product SET IsActive = 1 WHERE ProductID=?1", nativeQuery = true)
-	void delete(Integer productID);
+	@Query(value = "UPDATE manufacturer SET IsActive = 1 WHERE ManufacturerID=?1", nativeQuery = true)
+	void delete(Integer manufacturerID);
 }

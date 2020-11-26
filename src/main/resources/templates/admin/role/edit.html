@@ -13,18 +13,16 @@
 			<div class="card-header">
 				<h2 style="text-align: center;">Edit User</h2>
 			</div>
-		    <form th:object="${category}" th:action="@{/admin/category/update}" action="#" method="post">
+		    <form th:object="${role}" th:action="@{/admin/role/update}" action="#" method="post">
 				<div class="card-body">
-					<input type="hidden" th:field="*{categoryID}">
+					<input type="hidden" th:field="*{roleID}">
 					<div>
-			            <label th:text="CategoryName" th:for="categoryName"></label>
-			            <input type="text" th:field="*{categoryName}" class="form-control"/>
+			            <label th:text="RoleName" th:for="roleName"></label>
+			            <input type="text" th:field="*{roleName}" class="form-control"/>
+			        
 			        </div>
 			        <div style="clear: both; display: block; height: 10px"></div>
-			        <div>
-			            <label th:text="Description" th:for="description"></label>
-			            <textarea th:field="*{description}" style="width: 620px; height: 175px" ></textarea>
-			        </div>
+			        
 				</div>
 				<div class="card-footer">
 					<input type="submit" class="btn btn-success" value="Save" />
@@ -32,6 +30,11 @@
 			</form>
 		</div>
 	</div>
-	
+	<script>
+		var editor = '';
+		$(document).ready(function() {
+			editor = CKEDITOR.replace('content');
+		});
+	</script>
 </body>
 </html>

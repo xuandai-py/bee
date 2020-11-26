@@ -16,34 +16,25 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Autowired
 	private ProductRepository productRepository;
-	
+
 	@Override
-	public void saveProduct(Product product) {
-		productRepository.save(product);	
-	}
-	
-	@Override
-	public void deleteProduct(Integer productID) {
-		productRepository.deleteProduct(productID);
-		
+	public void save(Product product) {
+		productRepository.save(product);
 	}
 
 	@Override
-	public Optional<Product> findProductById(Integer productID) {
+	public void delete(Integer productID) {
+		productRepository.delete(productID);
+	}
+
+	@Override
+	public Optional<Product> findById(Integer productID) {
 		return productRepository.findById(productID);
 	}
 
 	@Override
 	public Page<Product> findPaginated(int pageNo, int pageSize) {
 		PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
-		return this.productRepository.getAllProduct(pageable);
+		return productRepository.getAllProduct(pageable);
 	}
-
-	@Override
-	public Page<Product> findPaginated1(String productName, int pageNo, int pageSize) {
-		return productRepository.searchProduct(productName, PageRequest.of(pageNo - 1, pageSize));
-	}
-
-	
-
 }

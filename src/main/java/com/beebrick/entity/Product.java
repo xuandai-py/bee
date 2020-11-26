@@ -1,6 +1,7 @@
 package com.beebrick.entity;
 
-import java.util.Set;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "product")
@@ -42,16 +46,33 @@ public class Product {
 	@Column(name = "Status")
 	private boolean status;
 	
+	@Column(name = "IsActive")
+	private boolean isActive;
+	
+	@Column(name = "CreatedDate", updatable = false)
+	@CreationTimestamp
+	private LocalDateTime createdDate;
+	
+	@Column(name = "ModifiedDate")
+	@UpdateTimestamp
+	private LocalDateTime modifiedDate;
+	
+	@Column(name = "CreatedBy", updatable = false)
+	private String createdBy;
+	
+	@Column(name = "ModifiedBy")
+	private String modifiedBy;
+	
 	@ManyToOne
 	@JoinColumn(name = "CategoryID")
 	private Category category;
 	
 	@ManyToOne
-	@JoinColumn(name = "SupplierID")
-	private Supplier supplier;
+	@JoinColumn(name = "ManufacturerID")
+	private Manufacturer manufacturer;
 	
 	@OneToMany(mappedBy = "ProductID")
-	Set<OrderDetail> orderDetail;
+	private List<OrderDetail> orderDetail;
 
 	public Integer getProductID() {
 		return productID;
@@ -117,6 +138,46 @@ public class Product {
 		this.status = status;
 	}
 
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public LocalDateTime getModifiedDate() {
+		return modifiedDate;
+	}
+
+	public void setModifiedDate(LocalDateTime modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
 	public Category getCategory() {
 		return category;
 	}
@@ -125,19 +186,19 @@ public class Product {
 		this.category = category;
 	}
 
-	public Supplier getSupplier() {
-		return supplier;
+	public Manufacturer getManufacturer() {
+		return manufacturer;
 	}
 
-	public void setSupplier(Supplier supplier) {
-		this.supplier = supplier;
+	public void setManufacturer(Manufacturer manufacturer) {
+		this.manufacturer = manufacturer;
 	}
 
-	public Set<OrderDetail> getOrderDetail() {
+	public List<OrderDetail> getOrderDetail() {
 		return orderDetail;
 	}
 
-	public void setOrderDetail(Set<OrderDetail> orderDetail) {
+	public void setOrderDetail(List<OrderDetail> orderDetail) {
 		this.orderDetail = orderDetail;
 	}
 }

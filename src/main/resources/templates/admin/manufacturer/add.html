@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Add User</title>
+	<link type="text/css" rel="stylesheet" href="../../bootstrap.min.css"  />
+	<style>
+		.error{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="container col-6">
+		<div class="card">
+			<div class="card-header">
+				<h2 style="text-align: center;">ADD NEW USER</h2>
+			</div>
+			<form th:object="${manufacturer}" th:action="@{/admin/manufacturer/save}" action="#" method="post">
+				<div class="card-body">
+					<div>
+			            <label th:text="ManufacturerName" th:for="manufacturerName"></label>
+			            <input type="text" th:field="*{manufacturerName}" class="form-control"/>
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+			        <div>
+			            <label th:text="ManufacturerAddress" th:for="manufacturerAddress"></label>
+			            <input type="text" th:field="*{manufacturerAddress}" class="form-control"/>
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+			        <div>
+			            <label th:text="ManufacturerEmail" th:for="manufacturerEmail"></label>
+			            <input type="text" th:field="*{manufacturerEmail}" class="form-control"/>
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+			        <div>
+			            <label th:text="ManufacturerPhone" th:for="manufacturerPhone"></label>
+			            <input type="text" th:field="*{manufacturerPhone}" class="form-control"/>
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+			        <div>
+			            <label th:text="Description" th:for="description"></label>
+			            <textarea th:field="*{description}" style="width: 620px; height: 175px" ></textarea>
+			        </div>
+			        
+
+				</div>
+				<div class="card-footer">
+					<input type="submit" class="btn btn-success" value="Save" />
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
