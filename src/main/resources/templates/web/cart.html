@@ -1,0 +1,139 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="web/common/header :: web-common-header" />
+<!--<div id="fb-root"></div>-->
+
+<body>
+
+<!-- Add your site or application content here -->
+<!-- Load Facebook SDK for JavaScript -->
+<div th:replace="web/common/header :: load-popup"/>
+<!---->
+<!--organicfood wrapper start-->
+<div class="organic_food_wrapper">
+    <div th:replace="web/common/header :: header"/>
+    <!--breadcrumb area start-->
+    <div class="breadcrumb_container">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <nav>
+                        <ul>
+                            <li><a href="index.html">Home ></a></li>
+                            <li>Cart</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--breadcrumb area end-->
+    <div class="cart_main_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <form action="#">
+                        <div class="table-content table-responsive">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th class="img-thumbnail"></th>
+                                    <th class="product-name"></th>
+                                    <th class="product-price"></th>
+                                    <th class="product-quantity"></th>
+                                    <th class="product-subtotal">Total</th>
+                                    <th class="product-remove"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="product-thumbnail"><img src="/assets/img/product/1_.jpg" alt=""></td>
+                                    <td class="product-name"><a href="#">Chameleonc Wazzupbaby</a></td>
+                                    <td class="product-price"><span class="amount">290.000₫</span></td>
+                                    <td class="product-quantity">
+                                        <div class="quickview_plus_minus quick_cart">
+                                            <div class="quickview_plus_minus_inner">
+                                                <div class="cart-plus-minus cart_page">
+                                                    <input type="text" value="1" name="qtybutton" class="cart-plus-minus-box">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="product-subtotal">290.000₫</td>
+                                    <td class="product-remove"><a href="#">Remove</a></td>
+                                </tr>
+                                </tbody>
+                                <tbody>
+                                <tr>
+                                    <td class="product-thumbnail"><img src="/assets/img/product/2_.jpg" alt=""></td>
+                                    <td class="product-name"><a href="#">Chameleonc Wazzupbaby</a></td>
+                                    <td class="product-price"><span class="amount">290.000₫</span></td>
+                                    <td class="product-quantity">
+                                        <div class="quickview_plus_minus quick_cart">
+                                            <div class="quickview_plus_minus_inner">
+                                                <div class="cart-plus-minus cart_page">
+                                                    <input type="text" value="1" name="qtybutton" class="cart-plus-minus-box">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="product-subtotal">290.000₫</td>
+                                    <td class="product-remove"><a href="#">Remove</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row table-responsive_bottom">
+                            <div class="col-lg-7 col-sm-7 col-md-7">
+                                <div class="buttons-carts">
+                                    <a href="#">Continue Shopping</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-sm-5 col-md-5">
+                                <div class="cart_totals  text-right">
+                                    <h2>Cart Totals</h2>
+                                    <div class="cart-subtotal">
+                                        <span>Subtotal</span>
+                                        <span>580.000đ</span>
+                                    </div>
+                                    <div class="cart-subtotal">
+                                        <span><strong>Shipping</strong> </span>
+                                        <span><strong>30.000₫ </strong> </span>
+                                    </div>
+                                    <div class="cart-subtotal">
+                                        <span><strong>Taxes</strong> </span>
+                                        <span><strong>0đ </strong> </span>
+                                    </div>
+                                    <div class="order-total">
+                                        <span><strong>Total</strong> </span>
+                                        <span><strong>630.000đ</strong> </span>
+                                    </div>
+
+                                    <div class="wc-proceed-to-checkout">
+                                        <a href="checkout.html">Proceed to Checkout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        //end
+
+</div>
+<!--Shipping area start-->
+<div th:replace="web/common/header :: shipping-area"/>
+
+<!-- footer start -->
+<div th:replace="web/common/header :: footer"/>
+
+<!-- footer end -->
+<!-- all js here -->
+<div th:replace="web/common/header :: body-bottom-scripts"/>
+</body>
+
+</html>

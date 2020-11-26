@@ -1,0 +1,519 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:fragment="web-common-header">
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>BEEBRICK - MÔ HÌNH ĐỒ CHƠI</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- Favicon -->
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet"/>
+
+    <link rel="icon" href="/image/applie-touch-icon.png"/>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon1.png"/>
+    <!-- all css here -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/assets/css/animate.css"/>
+    <link rel="stylesheet" href="/assets/css/owl.carousel.min.css"/>
+    <link rel="stylesheet" href="/assets/css/chosen.min.css"/>
+    <link rel="stylesheet" href="/assets/css/ionicons.min.css"/>
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/assets/css/material-design-iconic-font.min.css"/>
+    <link rel="stylesheet" href="/assets/css/meanmenu.min.css"/>
+    <link rel="stylesheet" href="/assets/css/bundle.css"/>
+    <link rel="stylesheet" href="/assets/css/style.css"/>
+    <link rel="stylesheet" href="/assets/css/responsive.css"/>
+    <link rel="stylesheet" href="/assets/css/test_popup.css"/>
+    <script src="/assets/js/onloadingFirst.js"></script>
+    <style>
+        #image {
+            width: 200px;
+        }
+    </style>
+</head>
+<!--<div id="fb-root"></div>-->
+
+
+<body>
+
+<!-- Add your site or application content here -->
+<!-- Load Facebook SDK for JavaScript -->
+<div th:fragment="load-popup">
+    <div id="fb-root"></div>
+
+    <!---TEST POPUP-->
+    <div class="login" id="login-box"><a class="login_title" href="#">Sign In</a>
+        <a class="close" href="#"><img class="img-close" title="Close Window" alt="Close"
+                                       src="/assets/img/logo/close.png"/></a>
+
+        <form class="login-content" action="#" method="post"><label class="username">
+            <span>Username</span>
+            <input id="username" type="text" autocomplete="on" name="username" placeholder="Email/ Mobile Number"
+                   value=""/>
+        </label>
+            <label class="password">
+                <span>Password</span>
+                <input id="password" type="password" name="password" placeholder="Password" value=""/>
+            </label>
+            <button class="button submit-button" type="button">Log In</button>
+            <div><a class="quen" href="#">Forgot Password?</a></div>
+            <div><img class="img-line" src="/assets/img/logo/line.png"/></div>
+            <div>
+                <a class="gg-fb">Or Using</a>
+                <div class="links">
+                    <div class="facebook">
+                        <i class="fab fa-facebook-square"><span>Facebook</span></i>
+                    </div>
+                    <div class="google">
+                        <i class="fab fa-google-plus-square"><span>Google</span></i>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!---->
+    <!---TEST POPUP-->
+    <div class="login" id="logup-box"><a class="login_title" href="#">Sign Up</a>
+        <a class="close" href="#"><img class="img-close" title="Close Window" alt="Close"
+                                       src="/assets/img/logo/close.png"/></a>
+
+        <form class="login-content" action="#" method="post">
+            <label class="name">
+                <span>Name</span>
+                <input id="name" type="text" autocomplete="on" name="name" placeholder="Your name"
+                       value=""/>
+            </label>
+            <label class="username">
+                <span>Username</span>
+                <input id="username" type="text" autocomplete="on" name="username" placeholder="Email/ Mobile Number"
+                       value=""/>
+            </label>
+            <label class="password">
+                <span>Password</span>
+                <input id="password" type="password" name="password" placeholder="Password" value=""/>
+            </label>
+            <label class="password">
+                <span>Confirm Password</span>
+                <input id="password" type="password" name="password" placeholder="Confirm Password" value=""/>
+            </label>
+            <label class="securitycode">
+                <span>Security Code</span>
+                <input id="securitycode" type="text" autocomplete="on" name="securitycode" placeholder="Security Code"
+                       value=""/>
+            </label>
+            <button class="button submit-button" type="button">Sign Up</button>
+        </form>
+    </div>
+</div>
+<!---->
+<!--organicfood wrapper start-->
+<div th:fragment="header">
+    <!--Header start-->
+    <header class="header sticky-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="header_wrapper_inner">
+
+                        <div class="logo col-xs-12">
+                            <a href="index.html"><img name="image" src="/images/logo-1.png" alt="BeeBrick_logo" id="image" /></a>
+                        </div>
+                        <div class="main_menu_inner">
+
+                            <div class="menu">
+                                <nav>
+                                    <ul>
+                                        <li class="active"><a href="@{/web/index}" />Home</li>
+                                        <li><a th:href="@{/web/about-us}">about us </a></li>
+                                        <li><a href="shop.html">shop</a></li>
+                                        <li><a href="blog.html">Blog </a>
+                                        </li>
+                                        <li class="mega_parent"><a href="#">Pages <i
+                                                class="fa fa-angle-down"></i></a>
+                                            <ul class="mega_menu">
+                                                <li class="mega_item">
+                                                    <a class="mega_title" href="#">BRANDS</a>
+                                                    <ul>
+                                                        <li><a href="#">1983 Toys</a></li>
+                                                        <li><a href="#">CJOY</a></li>
+                                                        <li><a href="#">Lam Toys</a></li>
+                                                        <li><a href="#">Popmart</a></li>
+                                                        <li><a href="#">Super Plastic</a></li>
+                                                        <li><a href="#">Medicom Toy</a></li>
+                                                        <li><a href="#">Tokidoki</a></li>
+                                                        <li><a href="#">Kimpark Lab</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="mega_item">
+                                                    <a class="mega_title" href="#">PRODUCTS</a>
+                                                    <ul>
+                                                        <li><a href="#">ALL</a></li>
+                                                        <li><a href="#">NEW ARRIVAL</a></li>
+                                                        <li><a href="#">BLINDBOX</a></li>
+                                                        <li><a href="#">DESIGNER TOY</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">offers and sales</a></li>
+                                        <li><a href="#">support</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+
+                            <div class="mobile-menu d-lg-none">
+                                <nav>
+                                    <ul>
+                                        <li class="active"><a href="index.html">Home</a>
+                                        </li>
+                                        <li><a href="about.html">about us </a></li>
+                                        <li><a href="shop.html">shop</a></li>
+                                        <li><a href="blog.html">Blog </a>
+                                        </li>
+                                        <li><a href="#">Pages</a>
+                                            <ul>
+                                                <li>
+                                                    <a href="#">BRANDS</a>
+                                                    <ul>
+                                                        <li><a href="#">1983 Toys</a></li>
+                                                        <li><a href="#">">CJOY</a></li>
+                                                        <li><a href="#">Lam Toys</a></li>
+                                                        <li><a href="#">Popmart</a></li>
+                                                        <li><a href="#">Super Plastic</a></li>
+                                                        <li><a href="#">Medicom Toy</a></li>
+                                                        <li><a href="#">Tokidoki</a></li>
+                                                        <li><a href="#">Kimpark Lab</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a href="#">PRODUCTS</a>
+                                                    <ul>
+                                                        <li><a href="#">ALL</a></li>
+                                                        <li><a href="#">NEW ARRIVAL</a></li>
+                                                        <li><a href="#">BLINDBOX</a></li>
+                                                        <li><a href="#">DESIGNER TOY</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">vegetable</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="header_right_info d-flex">
+                            <div class="search_box">
+                                <div class="search_inner">
+                                    <form action="#">
+                                        <input type="text" placeholder="Search our catalog" />
+                                        <button type="submit"><i class="ion-ios-search"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="mini__cart">
+                                <div class="mini_cart_inner">
+                                    <div class="cart_icon">
+                                        <a href="#">
+                                                <span class="cart_icon_inner">
+                                                    <i class="ion-android-cart"></i>
+                                                    <span class="cart_count">2</span>
+                                                </span>
+                                            <span class="item_total">610.000₫</span>
+                                        </a>
+                                    </div>
+                                    <!--Mini Cart Box-->
+                                    <div class="mini_cart_box cart_box_one">
+                                        <div class="mini_cart_item">
+                                            <div class="mini_cart_img">
+                                                <a href="#">
+                                                    <img src="/assets/img/product/1_.jpg" alt="" />
+                                                    <span class="cart_count">1</span>
+                                                </a>
+                                            </div>
+                                            <div class="cart_info">
+                                                <h5><a href="product-details.html">Chameleonc Wazzupbaby</a></h5>
+                                                <span class="cart_price">290.000₫</span>
+                                            </div>
+                                            <div class="cart_remove">
+                                                <a href="#"><i class="zmdi zmdi-delete"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="mini_cart_item">
+                                            <div class="mini_cart_img">
+                                                <a href="#">
+                                                    <img src="/assets/img/product/2_.jpg" alt="" />
+                                                    <span class="cart_count">1</span>
+                                                </a>
+                                            </div>
+                                            <div class="cart_info">
+                                                <h5><a href="product-details.html">Chameleonc Wazzupbaby</a></h5>
+                                                <span class="cart_price">290.000₫</span>
+                                            </div>
+                                            <div class="cart_remove">
+                                                <a href="#"><i class="zmdi zmdi-delete"></i></a>
+                                            </div>
+                                        </div>
+
+                                        <div class="price_content">
+                                            <div class="cart_subtotals">
+                                                <div class="price_inline">
+                                                    <span class="label">Subtotal </span>
+                                                    <span class="value">580.000₫</span>
+                                                </div>
+                                                <div class="price_inline">
+                                                    <span class="label">Shipping </span>
+                                                    <span class="value">30.000₫</span>
+                                                </div>
+                                                <div class="price_inline">
+                                                    <span class="label">Taxes </span>
+                                                    <span class="value">0₫</span>
+                                                </div>
+                                            </div>
+                                            <div class="cart-total-price">
+                                                <span class="label">Total </span>
+                                                <span class="value">610.000₫</span>
+                                            </div>
+                                        </div>
+                                        <div class="min_cart_checkout">
+                                            <a href="checkout.html">Checkout</a>
+                                        </div>
+                                    </div>
+                                    <!--Mini Cart Box End -->
+                                </div>
+                            </div>
+                            <div class="header_account">
+                                <div class="account_inner">
+                                    <a href="#"><i class="ion-gear-b"></i></a>
+                                </div>
+                                <div class="content-setting-dropdown">
+                                    <div class="language-selector-wrapper">
+                                        <div class="language-selector">
+                                            <ul>
+                                                <li>
+                                                    <a href="#"><img src="/assets/img/logo/co.png" alt="Language"
+                                                                     width="16px" height="11px" /><span
+                                                            class="expand-more">Việt Nam</span> </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><img src="/assets/img/1.jpg" alt="English" /><span
+                                                            class="expand-more">English</span></a>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                        <div class="currency-selector-wrapper">
+                                            <ul>
+                                                <li><a href="#">VND đ</a></li>
+                                                <li><a href="#">USD $</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="user_info_top">
+                                            <ul>
+                                                <li><a href="my-account.html">my account</a></li>
+                                                <li><a href="checkout.html">Checkout</a></li>
+                                                <li><a class="login-window" href="#login-box">Sign in</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--Header end-->
+</div>
+
+
+<!--Shipping area start-->
+<div th:fragment="shipping-area">
+    <div class="shipping_area">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="shipping_list d-flex justify-content-between flex-xs-column">
+                        <div class="single_shipping_box d-flex">
+                            <div class="shipping_icon">
+                                <img src="/assets/img/ship/1.png" alt="shipping icon"/>
+                            </div>
+                            <div class="shipping_content">
+                                <h6>Free Shipping On Order Over 1.000.000Đ</h6>
+                                <p>Free shipping on all order</p>
+                            </div>
+                        </div>
+                        <div class="single_shipping_box one d-flex">
+                            <div class="shipping_icon">
+                                <img src="/assets/img/ship/2.png" alt="shipping icon"/>
+                            </div>
+                            <div class="shipping_content">
+                                <h6>Money Return</h6>
+                                <p>Back guarantee under 7 days</p>
+                            </div>
+                        </div>
+                        <div class="single_shipping_box two d-flex">
+                            <div class="shipping_icon">
+                                <img src="/assets/img/ship/3.png" alt="shipping icon"/>
+                            </div>
+                            <div class="shipping_content">
+                                <h6>Member Discount</h6>
+                                <p>Support online 24 hours a day</p>
+                            </div>
+                        </div>
+                        <div class="single_shipping_box three d-flex">
+                            <div class="shipping_icon">
+                                <img src="/assets/img/ship/4.png" alt="shipping icon"/>
+                            </div>
+                            <div class="shipping_content">
+                                <h6>Online Support 24/7</h6>
+                                <p>Support online 24 hours a day</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- footer start -->
+<div th:fragment="footer">
+    <footer class="footer pt-90">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-12 col-xs-12">
+                    <!--Single Footer-->
+                    <div class="single_footer widget">
+                        <div class="single_footer_widget_inner">
+                            <div class="footer_logo">
+                                <a href="#"><img src="/images/logo_footer.png" alt="" width="270px"/></a>
+                            </div>
+                            <div class="footer_content">
+                                <p>Address: 436 Ba Tháng Hai, phường 12, quận 10, thành phố Hồ Chí Minh </p>
+                                <p>Phone: +(84) 123456789</p>
+                                <p>Email: Contact@beebrick.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.236439428106!2d106.62336721462259!3d10.793194692310133!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752c008296bd41%3A0xdc1619ebb2292377!2zMTY0IE5ndXnhu4VuIE5n4buNYyBOaOG7sXQsIFTDom4gUXXDvSwgVMOibiBQaMO6LCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1602775382458!5m2!1svi!2s"
+                            width="400" height="250" frameborder="0" style="border:0;" allowfullscreen=""
+                            aria-hidden="false" tabindex="0"></iframe>
+                    <!--Single Footer-->
+                </div>
+                <div class="col-lg-6 col-md-12 col-xs-12">
+                    <div class="footer_menu_list d-flex justify-content-between">
+                        <!--Single Footer-->
+                        <div class="single_footer widget">
+                            <div class="single_footer_widget_inner">
+                                <div class="footer_title">
+                                    <h2>Products</h2>
+                                </div>
+                                <div class="footer_menu">
+                                    <ul>
+                                        <li><a href="#"> Prices drop</a></li>
+                                        <li><a href="#"> New products</a></li>
+                                        <li><a href="#"> Best sales</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Single footer end-->
+                        <!--Single footer start-->
+                        <div class="single_footer widget">
+                            <div class="single_footer_widget_inner">
+                                <div class="footer_title">
+                                    <h2>Login</h2>
+                                </div>
+                                <div class="footer_menu">
+                                    <ul>
+                                        <li><a href="#"> Login</a></li>
+                                        <li><a href="#"> Contact us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Single Footer end-->
+                        <!--Single footer start-->
+                        <div class="single_footer widget">
+                            <div class="single_footer_widget_inner">
+                                <div class="footer_title">
+                                    <h2> Your account </h2>
+                                </div>
+                                <div class="footer_menu">
+                                    <ul>
+                                        <li><a href="#">Personal info</a></li>
+                                        <li><a href="#"> Orders</a></li>
+                                        <li><a href="#"> Login</a></li>
+                                        <li><a href="#"> Addresses</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Single Footer end-->
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12 col-xs-12">
+                    <div class="footer_title">
+                        <h2> Join Our Newsletter Now </h2>
+                    </div>
+                    <div class="footer_news_letter">
+                        <p>Get E-mail updates about our latest shop and special offers.</p>
+                        <div class="newsletter_form">
+                            <form action="#">
+                                <li><a class="login-window button" href="#logup-box">Sign Up</a></li>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-xs-12">
+                        <div class="copyright_text">
+                            <p>Copyright 2020 <a href="#">Beebrick</a>. All Rights Reserved</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-xs-12">
+                        <div class="footer_mastercard text-right">
+                            <a href="#"><img src="/assets/img/brand/payment.png" alt="payment-method"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+</div>
+
+<!-- footer end -->
+<!-- all js here -->
+<div th:fragment="body-bottom-scripts">
+    <script src="/assets/js/vendor/jquery-1.12.0.min.js"></script>
+    <script src="/assets/js/popper.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.meanmenu.min.js"></script>
+    <script src="/assets/js/isotope.pkgd.min.js"></script>
+    <script src="/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="/assets/js/jquery.counterup.min.js"></script>
+    <script src="/assets/js/waypoints.min.js"></script>
+    <script src="/assets/js/ajax-mail.js"></script>
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    <script src="/assets/js/plugins.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/assets/js/test_popup.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="/assets/js/vendor/modernizr-2.8.3.min.js"></script>
+</div>
+</body>
+
+</html>

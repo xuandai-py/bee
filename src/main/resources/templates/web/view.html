@@ -1,0 +1,229 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="web/common/header :: web-common-header" />
+<!--<div id="fb-root"></div>-->
+
+<body>
+
+    <!-- Add your site or application content here -->
+    <!-- Load Facebook SDK for JavaScript -->
+    <div th:replace="web/common/header :: load-popup"/>
+    <!---->
+    <!--organicfood wrapper start-->
+    <div class="organic_food_wrapper">
+        <div th:replace="web/common/header :: header"/>
+        <!--Slider start-->
+        <div class="slider_area">
+            <div class="slider_list  owl-carousel">
+                <div class="single_slide" style="background-image: url(/assets/img/banner/banner-1.jpg);">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="slider__content">
+                                    <p>Exclusive Offer -10% Off This Week</p>
+                                    <h2>Live <strong>healthy</strong> with a glass</h2>
+                                    <h3>of <strong>fruit juice</strong> every day</h3>
+                                    <h6>Starting at<span>$42.99</span></h6>
+                                    <div class="slider_btn">
+                                        <a href="shop.html">Shopping now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single_slide" style="background-image: url(/assets/img/banner/banner-2.jpg);">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="slider__content">
+                                    <p>Exclusive Offer -10% Off This Week</p>
+                                    <h2>We <strong>provide</strong> the best</h2>
+                                    <h3> product <strong> for you </strong></h3>
+                                    <h6>Starting at <span>$42.99</span></h6>
+                                    <div class="slider_btn">
+                                        <a href="shop.html">Shopping now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single_slide" style="background-image: url(/assets/img/banner/banner-3.jpg);">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="slider__content">
+                                    <p>Exclusive Offer -10% Off This Week</p>
+                                    <h2>We <strong>provide</strong> the best</h2>
+                                    <h3> product <strong> for you </strong></h3>
+                                    <h6>Starting at <span>$42.99</span></h6>
+                                    <div class="slider_btn">
+                                        <a href="shop.html">Shopping now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single_slide" style="background-image: url(/assets/img/banner/banner-4.jpg);">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="slider__content">
+                                    <p>Exclusive Offer -10% Off This Week</p>
+                                    <h2>We <strong>provide</strong> the best</h2>
+                                    <h3> product <strong> for you </strong></h3>
+                                    <h6>Starting at <span>$42.99</span></h6>
+                                    <div class="slider_btn">
+                                        <a href="shop.html">Shopping now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Slider end-->
+
+        <!--Banner area start-->
+        <div class="banner_area home1_banner mt-30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single_banner">
+                            <a href="#">
+                                <img src="/assets/img/banner/zakaria-ahada-VGR_ReUCqNw-unsplash.jpg" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single_banner">
+                            <a href="#">
+                                <img src="/assets/img/banner/xavi-cabrera-kn-UmDZQDjM-unsplash.jpg" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single_banner banner_three">
+                            <a href="#">
+                                <img src="/assets/img/banner/nastya-dulhiier-ZvbLznLCRc0-unsplash.jpg" height="265px" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Banner area end-->
+
+        <!--new arrival product area-->
+        <div class="features_product pt-90">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section_title text-center">
+                            <h3> New Arrival </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="features_product_active owl-carousel">
+                        <div th:each="product,iterStat  : ${products}">
+                            <div class="col-lg-2">
+                            <div class="single__product">
+                                <div class="single_product__inner">
+                                    <span class="new_badge">new</span>
+                                    <div class="product_img">
+                                        <a href="#">
+                                            <img src="assets/img/product/duckoo-tropical-island-blind-box-series-by-chokocider-x-pop-mart-the-toy-chronicle-2020.jpg"
+                                                 alt="">
+                                        </a>
+                                    </div>
+                                    <div class="product__content text-center">
+                                        <div class="produc_desc_info">
+                                            <div class="product_title">
+                                                <h4><a href="#" th:text="${product.productName}"></a>
+                                                </h4>
+                                            </div>
+                                            <div class="product_price">
+                                                <p th:text="${product.price}"></p>
+                                            </div>
+                                        </div>
+                                        <div class="product__hover">
+                                            <ul>
+                                                <li><a href="#"><i class="ion-android-cart"></i></a></li>
+                                                <li><a class="cart-fore" href="#" data-toggle="modal"
+                                                       data-target="#my_modal" title="Quick View"><i
+                                                        class="ion-android-open"></i></a></li>
+                                                <li><a href="product-details.html"><i class="ion-clipboard"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--New arrival product end-->
+
+        <!--Super Plastic product area-->
+        <div class="row">
+            <div class="col-12">
+                <div class="section_title text-center">
+                    <h3> Super Plastic </h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="features_product_active owl-carousel">
+                <div th:each="product,iterStat  : ${products}">
+                <div class="col-lg-2">
+                    <div class="single__product">
+                        <div class="single_product__inner">
+                            <div class="product_img">
+                                <a href="#">
+                                    <img src="assets/img/product/8in-tadodremon-blue-websiteproductimages-front-1600x-2.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="product__content text-center">
+                                <div class="produc_desc_info">
+                                    <div class="product_title">
+                                        <h4><a href="#" th:text="${product.productName}"></a></h4>
+                                    </div>
+                                    <div class="product_price">
+                                        <p th:text="${product.price}"></p>
+                                    </div>
+                                </div>
+                                <div class="product__hover">
+                                    <ul>
+                                        <li><a href="#"><i class="ion-android-cart"></i></a></li>
+                                        <li><a class="cart-fore" href="#" data-toggle="modal" data-target="#my_modal" title="Quick View"><i class="ion-android-open"></i></a></li>
+                                        <li><a href="product-details.html"><i class="ion-clipboard"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Shipping area start-->
+    <div th:replace="web/common/header :: shipping-area"/>
+
+    <!-- footer start -->
+    <div th:replace="web/common/header :: footer"/>
+
+    <!-- footer end -->
+    <!-- all js here -->
+    <div th:replace="web/common/header :: body-bottom-scripts"/>
+</body>
+
+</html>

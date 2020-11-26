@@ -54,6 +54,13 @@ public class ProductController {
 		return "admin/product/index";
 	}
 
+	@GetMapping("view/products")
+	public String viewProducts(Model model){
+		List<Product> list = productService.findAll();
+		model.addAttribute("products", list);
+		return "web/view";
+	}
+
 	@RequestMapping("admin/product")
 	public String index(Model model) {
 		return "redirect:/admin/product/page/1";

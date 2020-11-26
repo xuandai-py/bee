@@ -12,14 +12,13 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.beebrick.entity.Role;
@@ -91,6 +90,18 @@ public class UserController {
 	
 	@RequestMapping(value = "admin/user/update", method = RequestMethod.POST)
 	public String update(@Valid User user, BindingResult bindingResult, @RequestParam("photo_file") MultipartFile photo) {
+
+	@RequestMapping(value = "admin/user/detail", method = RequestMethod.GET)
+	public String detail(@RequestParam("userID") Integer userID, Model model) {
+		List<Role> roles = roleService.getAllRole();
+		model.addAttribute("roles", roles);
+		Optional<User> userEdit = userService.findUserById(userID);
+		userEdit.ifPresent(user -> model.addAttribute("user", user));
+		return "admin/user/detail";
+	}
+
+	@RequestMapping(value = "admin/user/save", method = RequestMethod.POST)
+	public String save(@Valid User user, BindingResult bindingResult, @RequestPart(value = "photo", required = true) MultipartFile photo) {
 		if (bindingResult.hasErrors()) {
 			return "admin/user/add";
 		} else {

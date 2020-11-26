@@ -11,7 +11,11 @@
 			<div class="card-header">
 				<h2 style="text-align: center;">Edit User</h2>
 			</div>
+<<<<<<< Updated upstream
 		    <form th:object="${user}" th:action="@{/admin/user/update}" action="#" method="post" enctype="multipart/form-data">
+=======
+		    <form th:object="${user}" th:action="@{/admin/user/save}"  method="post" enctype="multipart/form-data">
+>>>>>>> Stashed changes
 		    	<div class="card-body">
 			        <input type="hidden" th:field="*{userID}">
 			        <div>
