@@ -54,13 +54,6 @@ public class ProductController {
 		return "admin/product/index";
 	}
 
-	@GetMapping("view/products")
-	public String viewProducts(Model model){
-		List<Product> list = productService.findAll();
-		model.addAttribute("products", list);
-		return "web/view";
-	}
-
 	@RequestMapping("admin/product")
 	public String index(Model model) {
 		return "redirect:/admin/product/page/1";
@@ -130,4 +123,25 @@ public class ProductController {
 		productService.delete(productID);
 		return "redirect:/admin/product/page/1";
 	}
+
+	/*@GetMapping("admin/product/search/page/{pageNo}")
+	public String findPaginatedSearch(@Valid @PathVariable(value = "pageNo") int pageNo,
+									  @Param("keyword") String keyword, Model model) {
+
+		int pageSize = 10;
+		if (keyword == "") {
+			return findPaginated(1, model);
+		}
+
+		Page<Product> page = productService.findPaginated1(keyword, pageNo, pageSize);
+
+		List<Product> products = page.getContent();
+
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("products", products);
+		return "admin/product/index";
+
+	}*/
 }

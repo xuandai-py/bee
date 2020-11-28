@@ -1,4 +1,4 @@
-package com.beebrick.controller;
+package com.beebrick.controller.web;
 
 
 import com.beebrick.entity.Product;

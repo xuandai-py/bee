@@ -28,100 +28,97 @@ import com.beebrick.service.UserService;
 
 @Controller
 public class UserController {
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@Autowired
-	private RoleService roleService;
+    @Autowired
+    private RoleService roleService;
 
 
-	@GetMapping("admin/user/page/{pageNo}")
-	public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model) {
-		int pageSize = 20;
+    @GetMapping("admin/user/page/{pageNo}")
+    public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model) {
+        int pageSize = 20;
 
-		Page<User> page = userService.findPaginated(pageNo, pageSize);
-		List<User> users = page.getContent();
+        Page<User> page = userService.findPaginated(pageNo, pageSize);
+        List<User> users = page.getContent();
 
-		model.addAttribute("currentPage", pageNo);
-		model.addAttribute("totalPages", page.getTotalPages());
-		model.addAttribute("totalItems", page.getTotalElements());
-		model.addAttribute("users", users);
-		return "admin/user/index";
-	}
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("users", users);
+        return "admin/user/index";
+    }
 
-	@RequestMapping("admin/user")
-	public String index(Model model) {
-		return "redirect:/admin/user/page/1";
-	}
+    @RequestMapping("admin/user")
+    public String index(Model model) {
+        return "redirect:/admin/user/page/1";
+    }
 
-	@RequestMapping(value = "admin/user/add")
-	public String add(Model model) {
-		List<Role> roles = roleService.findAll();
-		model.addAttribute("roles", roles);
-		model.addAttribute("user", new User());
-		return "admin/user/add";
-	}
-	
-	@RequestMapping(value = "admin/user/save", method = RequestMethod.POST)
-	public String save(@Valid User user, BindingResult bindingResult, @RequestParam("photo_file") MultipartFile photo) {
-		if (bindingResult.hasErrors()) {
-			return "admin/user/add";
-		} else {
-			try {
-				Path path = Paths.get("uploads/");
-				InputStream inputStream = photo.getInputStream();
-				Files.copy(inputStream, path.resolve(photo.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
-				user.setImage(photo.getOriginalFilename().toLowerCase());
-			} catch (Exception e) {
-			}
-			userService.save(user);		
-			return "redirect:/admin/user/page/1";
-		}
-	}
+    @RequestMapping(value = "admin/user/add")
+    public String add(Model model) {
+        List<Role> roles = roleService.findAll();
+        model.addAttribute("roles", roles);
+        model.addAttribute("user", new User());
+        return "admin/user/add";
+    }
 
-	@RequestMapping(value = "admin/user/edit", method = RequestMethod.GET)
-	public String edit(@RequestParam("userID") Integer userID, Model model) {
-		List<Role> roles = roleService.findAll();
-		model.addAttribute("roles", roles);
-		Optional<User> edit = userService.findById(userID);
-		edit.ifPresent(user -> model.addAttribute("user", user));
-		return "admin/user/edit";
-	}
-	
-	@RequestMapping(value = "admin/user/update", method = RequestMethod.POST)
-	public String update(@Valid User user, BindingResult bindingResult, @RequestParam("photo_file") MultipartFile photo) {
+    @RequestMapping(value = "admin/user/save", method = RequestMethod.POST)
+    public String save(@Valid User user, BindingResult bindingResult, @RequestParam("photo_file") MultipartFile photo) {
+        if (bindingResult.hasErrors()) {
+            return "admin/user/add";
+        } else {
+            try {
+                Path path = Paths.get("uploads/");
+                InputStream inputStream = photo.getInputStream();
+                Files.copy(inputStream, path.resolve(photo.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+                user.setImage(photo.getOriginalFilename().toLowerCase());
+            } catch (Exception e) {
+            }
+            userService.save(user);
+            return "redirect:/admin/user/page/1";
+        }
+    }
 
-	@RequestMapping(value = "admin/user/detail", method = RequestMethod.GET)
-	public String detail(@RequestParam("userID") Integer userID, Model model) {
-		List<Role> roles = roleService.getAllRole();
-		model.addAttribute("roles", roles);
-		Optional<User> userEdit = userService.findUserById(userID);
-		userEdit.ifPresent(user -> model.addAttribute("user", user));
-		return "admin/user/detail";
-	}
+    /*@RequestMapping(value = "admin/user/detail", method = RequestMethod.GET)
+    public String detail(@RequestParam("userID") Integer userID, Model model) {
+        List<Role> roles = roleService.getAllRole();
+        model.addAttribute("roles", roles);
+        Optional<User> userEdit = userService.findUserById(userID);
+        userEdit.ifPresent(user -> model.addAttribute("user", user));
+        return "admin/user/detail";
+    }*/
 
-	@RequestMapping(value = "admin/user/save", method = RequestMethod.POST)
-	public String save(@Valid User user, BindingResult bindingResult, @RequestPart(value = "photo", required = true) MultipartFile photo) {
-		if (bindingResult.hasErrors()) {
-			return "admin/user/add";
-		} else {
-			try {
-				Path path = Paths.get("uploads/");
-				InputStream inputStream = photo.getInputStream();
-				Files.copy(inputStream, path.resolve(photo.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
-				user.setImage(photo.getOriginalFilename().toLowerCase());
-			} catch (Exception e) {
-			}
-			userService.save(user);		
-			return "redirect:/admin/user/page/1";
-		}
-	}
+    @RequestMapping(value = "admin/user/edit", method = RequestMethod.GET)
+    public String edit(@RequestParam("userID") Integer userID, Model model) {
+        List<Role> roles = roleService.findAll();
+        model.addAttribute("roles", roles);
+        Optional<User> edit = userService.findById(userID);
+        edit.ifPresent(user -> model.addAttribute("user", user));
+        return "admin/user/edit";
+    }
 
-	@RequestMapping(value = "admin/user/delete", method = RequestMethod.GET)
-	public String delete(@RequestParam("userID") Integer userID, Model model) {
-		userService.delete(userID);
-		return "redirect:/admin/user/page/1";
-	}
+    @RequestMapping(value = "admin/user/update", method = RequestMethod.POST)
+    public String update(@Valid User user, BindingResult bindingResult, @RequestParam("photo_file") MultipartFile photo) {
+        if (bindingResult.hasErrors()) {
+            return "admin/user/add";
+        } else {
+            try {
+                Path path = Paths.get("uploads/");
+                InputStream inputStream = photo.getInputStream();
+                Files.copy(inputStream, path.resolve(photo.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+                user.setImage(photo.getOriginalFilename().toLowerCase());
+            } catch (Exception e) {
+            }
+            userService.save(user);
+            return "redirect:/admin/user/page/1";
+        }
+    }
+
+    @RequestMapping(value = "admin/user/delete", method = RequestMethod.GET)
+    public String delete(@RequestParam("userID") Integer userID, Model model) {
+        userService.delete(userID);
+        return "redirect:/admin/user/page/1";
+    }
 
 //	@RequestMapping(value = "/search", method = RequestMethod.GET)
 //	public String find(@Param("keyword") String keyword, Model model) {
