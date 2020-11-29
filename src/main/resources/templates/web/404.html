@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="web/common/header :: web-common-header" />
+<!--<div id="fb-root"></div>-->
+</head>
+<body>
+	<!-- Add your site or application content here -->
+	<!-- Load Facebook SDK for JavaScript -->
+	<div th:replace="web/common/header :: load-popup" />
+	<!---->
+	<!--organicfood wrapper start-->
+	
+		<div th:replace="web/common/header :: header" />
+		<!--Slider start-->
+		<!-- Start Maincontent  -->
+		<section class="main-content-area error_pages ptb-100">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 offset-lg-2 col-md-12 col-12">
+						<div class="error-wrapper text-center">
+							<div class="error-text">
+								<h2>404</h2>
+								<h5>Sorry, we can't find the page.</h5>
+								<p>You are looking for does not exist, have been removed,
+									name changed or is temporarity unavailable.</p>
+							</div>
+							<div class="search-error product-search">
+								<form action="#">
+									<input type="text" class="input-text"
+										placeholder="Search entire store here...">
+									<button type="submit" class="submit-btn">Search</button>
+								</form>
+							</div>
+							<div class="back_home_page">
+								<a href="index.html">Back to home page</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End Maincontent  -->
+		<!--Shipping area start-->
+		<div th:replace="web/common/header :: shipping-area" />
+
+		<!-- footer start -->
+		<div th:replace="web/common/header :: footer" />
+
+		<!-- footer end -->
+		<!-- all js here -->
+		<div th:replace="web/common/header :: body-bottom-scripts" />
+</body>
+</html>

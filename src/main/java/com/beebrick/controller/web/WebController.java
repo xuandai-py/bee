@@ -13,12 +13,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/web")
-public class newController {
+public class WebController {
 
     @Autowired
     ProductService productService;
 
-    @GetMapping("/")
+    @GetMapping(value = {"/", "/index"}) // tra ve trang index cho nguoi dung.
     public String index(){
         return "web/view";
     }
@@ -39,5 +39,8 @@ public class newController {
         model.addAttribute("products", list);
         return "web/shop";
     }
+
+    @GetMapping("/contact")
+    public String contact(){return "web/contact";}
 
 }
