@@ -1,8 +1,10 @@
-/*
 package com.beebrick.controller;
 
 import com.beebrick.entity.CartItem;
+import com.beebrick.entity.ShoppingCart;
+import com.beebrick.entity.User;
 import com.beebrick.service.CartItemService;
+import com.beebrick.service.ShoppingCartService;
 import com.beebrick.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +24,6 @@ public class ShoppingCartController {
     @Autowired
     private CartItemService cartItemService;
 
-
-
-
-
     @Autowired
     private ShoppingCartService shoppingCartService;
 
@@ -41,10 +39,10 @@ public class ShoppingCartController {
         model.addAttribute("cartItemList", cartItemList);
         model.addAttribute("shoppingCart", shoppingCart);
 
-        return "shoppingCart";
+        return "web/cart";
     }
 
-    @RequestMapping("/addItem")
+    /*@RequestMapping("/addItem")
     public String addItem(
             @ModelAttribute("book") Book book,
             @ModelAttribute("qty") String qty,
@@ -81,6 +79,5 @@ public class ShoppingCartController {
         cartItemService.removeCartItem(cartItemService.findById(id));
 
         return "forward:/shoppingCart/cart";
-    }
+    }*/
 }
-*/

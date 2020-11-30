@@ -43,4 +43,11 @@ public class WebController {
     @GetMapping("/contact")
     public String contact(){return "web/contact";}
 
+    @RequestMapping("/myAccount")
+    public String myAccount(){
+        return "web/my-account";
+    }
+
+
+
 }

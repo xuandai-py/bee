@@ -12,6 +12,8 @@ public interface UserService {
 
 	void delete(Integer userID);
 
+	User findByUsername(String userName);
+
 	Optional<User> findById(Integer userID);
 	
 	Page<User> findPaginated(int pageNo, int pageSize);

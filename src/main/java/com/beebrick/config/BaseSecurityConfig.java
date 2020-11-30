@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
-@Order(1)
+@Order(3)
 public class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] CLASS_PATH = {
@@ -22,10 +22,7 @@ public class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers(CLASS_PATH)
                 .permitAll().anyRequest().authenticated()
-
-                .and().exceptionHandling().accessDeniedPage("/web/404");
-
-
+                .and().exceptionHandling().accessDeniedPage("/web/403");
 
     }
 

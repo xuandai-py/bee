@@ -45,21 +45,27 @@
     <div id="fb-root"></div>
 
     <!---TEST POPUP-->
-    <div class="login" id="login-box"><a class="login_title" href="#">Sign In</a>
+    <div class="login" id="login-box">
+        <a class="login_title" href="#">Sign In</a>
         <a class="close" href="#"><img class="img-close" title="Close Window" alt="Close"
                                        src="/assets/img/logo/close.png"/></a>
 
         <form class="login-content" action="#" method="post"><label class="username">
             <span>Username</span>
-            <input id="username" type="text" autocomplete="on" name="username" placeholder="Email/ Mobile Number"
+            <input id="username" type="text" required="required" autocomplete="on" name="username" placeholder="Email/ Mobile Number"
                    value=""/>
         </label>
             <label class="password">
                 <span>Password</span>
-                <input id="password" type="password" name="password" placeholder="Password" value=""/>
+                <input id="password" type="password" required="required" name="password" placeholder="Password" value=""/>
             </label>
             <button class="button submit-button" type="button">Log In</button>
-            <div><a class="quen" href="#">Forgot Password?</a></div>
+
+            <div class="quen" >
+                <a class="d-block" href="#forgot-box">Forgot Password?</a>
+                <a class="d-block" href="#signup-box">Sign up</a>
+            </div>
+
             <div><img class="img-line" src="/assets/img/logo/line.png"/></div>
             <div>
                 <a class="gg-fb">Or Using</a>
@@ -76,35 +82,52 @@
     </div>
     <!---->
     <!---TEST POPUP-->
-    <div class="login" id="logup-box"><a class="login_title" href="#">Sign Up</a>
+    <div class="login" id="signup-box"><a class="login_title" href="#">Sign Up</a>
         <a class="close" href="#"><img class="img-close" title="Close Window" alt="Close"
                                        src="/assets/img/logo/close.png"/></a>
 
         <form class="login-content" action="#" method="post">
             <label class="name">
                 <span>Name</span>
-                <input id="name" type="text" autocomplete="on" name="name" placeholder="Your name"
+                <input id="name" type="text" autocomplete="on" name="name" placeholder="Your name" required="required"
                        value=""/>
             </label>
             <label class="username">
                 <span>Username</span>
-                <input id="username" type="text" autocomplete="on" name="username" placeholder="Email/ Mobile Number"
+                <input id="newUsername" type="text" required="required" autocomplete="on" name="newUsername" placeholder="Email/ Mobile Number"
                        value=""/>
             </label>
             <label class="password">
                 <span>Password</span>
-                <input id="password" type="password" name="password" placeholder="Password" value=""/>
+                <input id="newPassword" type="password" required="required" name="newPassword" placeholder="Password" value=""/>
             </label>
             <label class="password">
                 <span>Confirm Password</span>
-                <input id="password" type="password" name="password" placeholder="Confirm Password" value=""/>
+                <input id="confirmNewPassword" type="password" required="required" name="confirmNewPassword" placeholder="Confirm Password" value=""/>
             </label>
             <label class="securitycode">
                 <span>Security Code</span>
-                <input id="securitycode" type="text" autocomplete="on" name="securitycode" placeholder="Security Code"
+                <input id="securitycode" type="text" required="required" autocomplete="on" name="securitycode" placeholder="Security Code"
                        value=""/>
             </label>
             <button class="button submit-button" type="button">Sign Up</button>
+        </form>
+    </div>
+
+    <!---TEST POPUP-->
+    <div class="login" id="forgot-box">
+        <a class="login_title" href="#">Forgot Password</a>
+        <a class="close" href="#"><img class="img-close" title="Close Window" alt="Close"
+                                       src="/assets/img/logo/close.png"/></a>
+
+        <form class="login-content" action="#" method="post">
+            <label class="name">
+                <span>Your Email:</span>
+                <input id="recoverEmail" type="email" autocomplete="on" name="name" placeholder="Enter your registered email address" required="required"
+                       value=""/>
+            </label>
+
+            <button class="button submit-button" type="button">Recover</button>
         </form>
     </div>
 </div>

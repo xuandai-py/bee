@@ -28,4 +28,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	@Query(value = "SELECT * FROM users WHERE Username LIKE %?1% and IsActive = 0", nativeQuery = true)
 	public List<User> search1(String pageable);
+
+	User findByUsername(String username);
 }

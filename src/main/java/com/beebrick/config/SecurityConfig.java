@@ -15,7 +15,7 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 @Configuration
 @EnableWebSecurity
-@Order(2)
+@Order(1)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-        auth.inMemoryAuthentication().passwordEncoder(passwordEncoder()).withUser("test").password("$2a$04$Q2Cq0k57zf2Vs/n3JXwzmerql9RzElr.J7aQd3/Sq0fw/BdDFPAj.").roles("ADMIN");
+        auth.inMemoryAuthentication().passwordEncoder(passwordEncoder()).withUser("test").password("$2y$12$.dL7ilB8TTEmrUaFYqbYk.RqjIw.iE0miO00fSigPDs88Y6vChaWC").roles("ADMIN");
 //		auth.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance()).withUser("kai").password("123456").roles("USER");
 
     }
@@ -51,15 +51,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .maximumSessions(1).expiredUrl("/login?message=max_session").maxSessionsPreventsLogin(true);
 
         // Cấu hình cho Login Form.
-        http.authorizeRequests().and().formLogin()//
-                .loginProcessingUrl("/j_spring_security_login")//
-                .loginPage("/login")//
-                .defaultSuccessUrl("/admin/user/list")//
+        http.authorizeRequests().and().formLogin()
+                .loginProcessingUrl("/j_spring_security_login")
+                .loginPage("/login")
+                .defaultSuccessUrl("/admin/user/list")
                 .failureHandler(customAuthenticationFailureHandler)
-                .usernameParameter("username")//
+                .usernameParameter("username")
                 .passwordParameter("password")
-                // Cấu hình cho Logout Page.
                 .and().logout().logoutUrl("/j_spring_security_logout").logoutSuccessUrl("/login?message=logout");
+
+
+        http.exceptionHandling().accessDeniedPage("/web/403");
+
 
     }
 

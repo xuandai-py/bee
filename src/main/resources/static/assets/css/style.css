@@ -2,6 +2,10 @@
     padding: 0 60px;
 }
 
+
+.text-center{
+    text-align: center !important;
+}
 .header_wrapper_inner {
     -webkit-box-align: center;
     -ms-flex-align: center;
