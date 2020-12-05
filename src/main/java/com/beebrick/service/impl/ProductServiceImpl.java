@@ -15,9 +15,14 @@ import com.beebrick.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-	
+
 	@Autowired
 	private ProductRepository productRepository;
+
+	@Override
+	public List<Product> getAll() {
+		return productRepository.getAll();
+	}
 
 	@Override
 	public void save(Product product) {
@@ -32,28 +37,12 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Optional<Product> findById(Integer productID) {
 		return productRepository.findById(productID);
-}
-	public List<Product> findAll() {
-		List<Product> products = productRepository.findAll();
-		List<Product> activeProductList = new ArrayList<>();
-
-		for (Product product: products){
-			if(product.isStatus()){
-				activeProductList.add(product);
-			}
-		}
-		return activeProductList;
-	}
-
-
-	@Override
-	public Optional<Product> findProductById(Integer productID) {
-		return productRepository.findById(productID);
 	}
 
 	@Override
-	public Page<Product> findPaginated(int pageNo, int pageSize) {
-		PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
-		return productRepository.getAllProduct(pageable);
+	public List<Product> getAllRandom() {
+		return productRepository.getAllRamdom();
 	}
+
+
 }

@@ -10,14 +10,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.beebrick.entity.Blog;
 
+import java.util.List;
+
 @Repository
 public interface BlogRepository extends JpaRepository<Blog, Integer>{
-	
-	@Query(value = "SELECT * FROM blog WHERE IsActive = 0", nativeQuery = true)
-	public Page<Blog> getAllBlog(Pageable pageable);
-	
+
+	@Query(value = "SELECT * FROM blogs WHERE IsActive = 0", nativeQuery = true)
+	public List<Blog> getAll();
+
 	@Modifying
 	@Transactional
-	@Query(value = "UPDATE blog SET IsActive = 1 WHERE BlogID=?1", nativeQuery = true)
+	@Query(value = "UPDATE blogs SET IsActive = 1 WHERE BlogID=?1", nativeQuery = true)
 	void delete(Integer blogID);
 }

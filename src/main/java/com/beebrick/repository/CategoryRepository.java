@@ -10,14 +10,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.beebrick.entity.Category;
 
+import java.util.List;
+
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer>{
-	
-	@Query(value = "SELECT * FROM category WHERE IsActive = 0", nativeQuery = true)
-	public Page<Category> getAllCategory(Pageable pageable);
-	
+
+	@Query(value = "SELECT * FROM categories WHERE IsActive = 0", nativeQuery = true)
+	public List<Category> getAll();
+
 	@Modifying
 	@Transactional
-	@Query(value = "UPDATE category SET IsActive = 1 WHERE CategoryID=?1", nativeQuery = true)
+	@Query(value = "UPDATE categories SET IsActive = 1 WHERE CategoryID=?1", nativeQuery = true)
 	void delete(Integer categoryID);
+
+	@Query(value = "SELECT * FROM categories WHERE CategoryName = ?1", nativeQuery = true)
+	public List<Category> findByName(String categoryName);
 }

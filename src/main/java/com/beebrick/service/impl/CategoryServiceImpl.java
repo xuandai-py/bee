@@ -19,8 +19,8 @@ public class CategoryServiceImpl implements CategoryService {
 	private CategoryRepository categoryRepository;
 
 	@Override
-	public List<Category> findAll() {
-		return categoryRepository.findAll();
+	public List<Category> getAll() {
+		return categoryRepository.getAll();
 	}
 
 	@Override
@@ -39,9 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Page<Category> findPaginated(int pageNo, int pageSize) {
-		PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
-		return categoryRepository.getAllCategory(pageable);
+	public List<Category> findByName(String categoryName) {
+		return categoryRepository.findByName(categoryName);
 	}
-
 }

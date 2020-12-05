@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
+import com.beebrick.entity.Authority.AuthenticationProvider;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,116 +18,69 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name = "users")
-public class User implements UserDetails {
+@Table(name = "employees")
+public class Employee {
+
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "UserID")
-	private Integer userID;
-	
+	@NotBlank(message = "Please enter username")
 	@Column(name = "Username")
 	private String username;
 
+	@Size(min = 8, message = "Password at least 8 characters")
 	@Column(name = "Password")
 	private String password;
-	
+
+	@NotBlank(message = "Please enter fullname")
 	@Column(name = "Fullname")
 	private String fullname;
 
+	@NotBlank(message = "Please enter address")
 	@Column(name = "Address")
 	private String address;
 
+	@Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,63}$", message = "Please enter the correct email format")
 	@Column(name = "Email")
 	private String email;
-	
-	@Column(name = "Phone")
-	private String phone;
-	
+
+	@Pattern(regexp="([0][0-9]{9})", message = "Please enter the correct phone number format")
+	@Column(name = "PhoneNumber")
+	private String phoneNumber;
+
 	@Column(name = "Image")
 	private String image;
-	
+
+	@NotNull(message = "Please choose birthday of fill full mm/dd/yyyy")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "Birthday")
 	private LocalDate birthday;
-	
+
 	@Column(name = "Gender")
 	private Integer gender;
-	
+
 	@Column(name = "IsActive")
 	private boolean isActive;
-	
+
 	@Column(name = "CreatedDate", updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdDate;
-	
+
 	@Column(name = "ModifiedDate")
 	@UpdateTimestamp
 	private LocalDateTime modifiedDate;
-	
+
 	@Column(name = "CreatedBy", updatable = false)
 	private String createdBy;
-	
+
 	@Column(name = "ModifiedBy")
 	private String modifiedBy;
-	
-	@ManyToOne
-	@JoinColumn(name = "RoleID")
-	private Role roles;
-	
-	@OneToMany(mappedBy = "users")
-	private List<Order> order;
-
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-	private ShoppingCart shoppingCart;
-
-	public Integer getUserID() {
-		return userID;
-	}
-
-	public void setUserID(Integer userID) {
-		this.userID = userID;
-	}
 
 	public String getUsername() {
 		return username;
 	}
 
-	@Override
-	public boolean isAccountNonExpired() {
-		return false;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return false;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return false;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return false;
-	}
-
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
-	}
-
-	public ShoppingCart getShoppingCart() {
-		return shoppingCart;
-	}
-
-	public void setShoppingCart(ShoppingCart shoppingCart) {
-		this.shoppingCart = shoppingCart;
 	}
 
 	public String getPassword() {
@@ -160,12 +115,12 @@ public class User implements UserDetails {
 		this.email = email;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getImage() {
@@ -230,21 +185,5 @@ public class User implements UserDetails {
 
 	public void setModifiedBy(String modifiedBy) {
 		this.modifiedBy = modifiedBy;
-	}
-
-	public Role getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Role roles) {
-		this.roles = roles;
-	}
-
-	public List<Order> getOrder() {
-		return order;
-	}
-
-	public void setOrder(List<Order> order) {
-		this.order = order;
 	}
 }

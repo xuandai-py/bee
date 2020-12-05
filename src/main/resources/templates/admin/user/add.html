@@ -25,7 +25,7 @@
 			<div class="card-header">
 				<h2 style="text-align: center;">ADD NEW USER</h2>
 			</div>
-			<form th:object="${user}" th:action="@{/admin/user/save}" action="#" method="post" enctype="multipart/form-data">
+			<form th:object="${employee}" th:action="@{/admin/employee/save}" action="#" method="post" enctype="multipart/form-data">
 				<div class="card-body">
 					<div>
 			            <label th:text="Username" th:for="username"></label>

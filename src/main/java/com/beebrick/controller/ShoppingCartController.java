@@ -1,11 +1,11 @@
 package com.beebrick.controller;
 
 import com.beebrick.entity.CartItem;
+import com.beebrick.entity.Customer;
 import com.beebrick.entity.ShoppingCart;
-import com.beebrick.entity.User;
 import com.beebrick.service.CartItemService;
+import com.beebrick.service.CustomerService;
 import com.beebrick.service.ShoppingCartService;
-import com.beebrick.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,7 @@ import java.util.List;
 public class ShoppingCartController {
 
     @Autowired
-    private UserService userService;
+    private CustomerService customerService;
 
     @Autowired
     private CartItemService cartItemService;
@@ -29,8 +29,8 @@ public class ShoppingCartController {
 
     @RequestMapping("/cart")
     public String shoppingCart(Model model, Principal principal) {
-        User user = userService.findByUsername(principal.getName());
-        ShoppingCart shoppingCart = user.getShoppingCart();
+        Customer customer = customerService.findBycustomername(principal.getName());
+        ShoppingCart shoppingCart = customer.getShoppingCart();
 
         List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
 

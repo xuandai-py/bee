@@ -8,39 +8,42 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name = "blog")
+@Table(name = "blogs")
 public class Blog {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "BlogID")
 	private Integer blogID;
-	
+
+	@NotBlank(message = "Please enter title")
 	@Column(name = "Title")
 	private String title;
-	
+
+	@NotBlank(message = "Please enter content")
 	@Column(name = "Content", length = 7000)
 	private String content;
-	
+
 	@Column(name = "IsActive")
 	private boolean isActive;
-	
+
 	@Column(name = "CreatedDate", updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdDate;
-	
+
 	@Column(name = "ModifiedDate")
 	@UpdateTimestamp
 	private LocalDateTime modifiedDate;
-	
+
 	@Column(name = "CreatedBy", updatable = false)
 	private String createdBy;
-	
+
 	@Column(name = "ModifiedBy")
 	private String modifiedBy;
 

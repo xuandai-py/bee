@@ -10,14 +10,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.beebrick.entity.Manufacturer;
 
+import java.util.List;
+
 @Repository
 public interface ManufacturerRepository extends JpaRepository<Manufacturer, Integer>{
-	
-	@Query(value = "SELECT * FROM manufacturer WHERE IsActive = 0", nativeQuery = true)
-	public Page<Manufacturer> getAllManufacturer(Pageable pageable);
-	
+
+	@Query(value = "SELECT * FROM manufactures WHERE IsActive = 0", nativeQuery = true)
+	public List<Manufacturer> getAll();
+
 	@Modifying
 	@Transactional
-	@Query(value = "UPDATE manufacturer SET IsActive = 1 WHERE ManufacturerID=?1", nativeQuery = true)
+	@Query(value = "UPDATE manufactures SET IsActive = 1 WHERE ManufacturerID=?1", nativeQuery = true)
 	void delete(Integer manufacturerID);
+
+	@Query(value = "SELECT * FROM manufactures WHERE ManufacturerName = ?1", nativeQuery = true)
+	public List<Manufacturer> findByName(String manufacturerName);
 }

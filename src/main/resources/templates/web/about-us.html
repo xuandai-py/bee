@@ -1,10 +1,296 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html class="no-js" lang="zxx" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="web/common/header :: web-common-header">
+    <!--<div id="fb-root"></div>-->
 </head>
 <body>
+<div class="content">
 
+<!-- Add your site or application content here -->
+<!-- Load Facebook SDK for JavaScript -->
+<div th:replace="web/common/header :: load-popup"/>
+<!---->
+<div th:replace="web/common/header :: header"/>
+<!-- Your Chat Plugin code -->
+<div class="fb-customerchat" attribution=setup_tool page_id="104109461483570" theme_color="#0A7CFF"
+     logged_in_greeting="Xin chào!!! Bạn cần chúng tôi giúp gì không ?"
+     logged_out_greeting="Xin chào!!! Bạn cần chúng tôi giúp gì không ?">
+</div>
+
+<!--about section area start-->
+<div class="about_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 col-md-12 text-center">
+                <div class="about_section_one">
+                    <h2>Who I Am? </h2>
+                    <p>
+                        <Strong>Beebrick</Strong> được thành lập ngày 14/09/2020, hoạt động trong lĩnh vực kinh doanh
+                        nổi bật với các sản phẩm như các tượng (figure), tượng lắp ráp (nendoroid, figma), tượng theo
+                        bộ.</p>
+                    <p>Cửa hàng tại <strong>436B/42/14 đường 3 Tháng 2, phường 12, quận 10</strong></p>
+                    <p>Số điện thoại <strong>012345789</strong></p>
+                    <p>Website <br>Trang chủ <strong>https://beebrick.vn</strong> <br>Fanpage &nbsp &nbsp<strong>https://www.facebook.com/BeebrickStore</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--about section area end-->
+<!-- about area start-->
+<div class="about_chooseUs_area">
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-xl-6 col-lg-12 col-md-12">
+                <div class="video__wrape__area" style="background-image:url(assets/img/banner/gundam.jpg)">
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-12 col-md-12">
+                <div class="about_choose_content">
+                    <h3>Where Can You Buy Products?</h3>
+                    <div class="choose_content_inner">
+                        <div class="single_choose_us">
+                            <div class="choose_us mb-50">
+                                <div class="choose_icone">
+                                    <i class="zmdi zmdi-favorite-outline"></i>
+                                </div>
+                                <div class="choose_details">
+                                    <h4>Tại cửa hàng</h4>
+                                    <p>436B/42/14 đường 3 Tháng 2, phường 12, quận 10, thành phố Hồ Chí Minh</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single_choose_us">
+                        <div class="choose_us  mb-50">
+                            <div class="choose_icone">
+                                <i class="zmdi zmdi-refresh-alt"></i>
+                            </div>
+                            <div class="choose_details">
+                                <h4>Mua Hàng Online</h4>
+                                <p>
+                                    <Strong>Trang chủ</Strong> https://beebrick.vn</p>
+                                <p>
+                                    <Strong>Fanpage</Strong>&nbsp &nbsp https://facebook.com/BeebrickStore</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- about area end -->
+<br><br><br><br><br><br><br>
+<!-- about area start-->
+<div class="about_chooseUs_area">
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-xl-6 col-lg-12 col-md-12">
+                <div class="about_choose_content">
+                    <h3>Why Choose Us?</h3>
+                    <div class="choose_content_inner">
+                        <div class="single_choose_us">
+                            <div class="choose_us mb-50">
+                                <div class="choose_icone">
+                                    <i class="zmdi zmdi-favorite-outline"></i>
+                                </div>
+                                <div class="choose_details">
+                                    <h4>Free Gift Box</h4>
+                                    <p>Lorem ipsum dolor sit amet consect adipisic elit sed do. </p>
+                                </div>
+                            </div>
+                            <div class="choose_us">
+                                <div class="choose_icone">
+                                    <i class="zmdi zmdi-truck"></i>
+                                </div>
+                                <div class="choose_details">
+                                    <h4>Free Delivery</h4>
+                                    <p>Lorem ipsum dolor sit amet consect adipisic elit sed do. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single_choose_us">
+                            <div class="choose_us  mb-50">
+                                <div class="choose_icone">
+                                    <i class="zmdi zmdi-refresh-alt"></i>
+                                </div>
+                                <div class="choose_details">
+                                    <h4>Money Back</h4>
+                                    <p>Lorem ipsum dolor sit amet consect adipisic elit sed do. </p>
+                                </div>
+                            </div>
+                            <div class="choose_us">
+                                <div class="choose_icone"><i class="zmdi zmdi-time"></i></div>
+                                <div class="choose_details">
+                                    <h4>Support 24/7</h4>
+                                    <p>Lorem ipsum dolor sit amet consect adipisic elit sed do. </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-12 col-md-12">
+                <div class="video__wrape__area" style="background-image:url(assets/img/banner/super.jpg)">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- about area end -->
+
+<!--about team area start-->
+<div class="about_team_area ptb-90">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="about_section_title">
+                    <h2>Our Staff</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmod tempor incididunt ut
+                        labo.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="single_team">
+                    <div class="team__imge">
+                        <a href="#"><img src="assets/img/banner/team1.jpg" alt=""></a>
+                    </div>
+                    <div class="team_hover_inpo">
+                        <div class="team_hover_action">
+                            <h2><a href="#">Grace Porter</a></h2>
+                            <ul>
+                                <li><a href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-google-plus"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="single_team">
+                    <div class="team__imge">
+                        <a href="#"><img src="assets/img/banner/team2.jpg" alt=""></a>
+                    </div>
+                    <div class="team_hover_inpo">
+                        <div class="team_hover_action">
+                            <h2><a href="#">Larry Martin</a></h2>
+                            <ul>
+                                <li><a href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-google-plus"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="single_team team__three">
+                    <div class="team__imge">
+                        <a href="#"><img src="assets/img/banner/team4.jpg" alt=""></a>
+                    </div>
+                    <div class="team_hover_inpo">
+                        <div class="team_hover_action">
+                            <h2><a href="#">Tiffany Fowler</a></h2>
+                            <ul>
+                                <li><a href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-google-plus"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="single_team">
+                    <div class="team__imge">
+                        <a href="#"><img src="assets/img/banner/team1.jpg" alt=""></a>
+                    </div>
+                    <div class="team_hover_inpo">
+                        <div class="team_hover_action">
+                            <h2><a href="#">Grace Porter</a></h2>
+                            <ul>
+                                <li><a href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-google-plus"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="single_team">
+                    <div class="team__imge">
+                        <a href="#"><img src="assets/img/banner/team2.jpg" alt=""></a>
+                    </div>
+                    <div class="team_hover_inpo">
+                        <div class="team_hover_action">
+                            <h2><a href="#">Larry Martin</a></h2>
+                            <ul>
+                                <li><a href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-google-plus"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="single_team team__three">
+                    <div class="team__imge">
+                        <a href="#"><img src="assets/img/banner/team4.jpg" alt=""></a>
+                    </div>
+                    <div class="team_hover_inpo">
+                        <div class="team_hover_action">
+                            <h2><a href="#">Tiffany Fowler</a></h2>
+                            <ul>
+                                <li><a href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-instagram"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-facebook"></i></a></li>
+                                <li><a href="#"><i class="zmdi zmdi-google-plus"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- all js here -->
+<!-- End Maincontent  -->
+<!--Shipping area start-->
+<div th:replace="web/common/header :: shipping-area"/>
+
+<!-- footer start -->
+<div th:replace="web/common/header :: footer"/>
+
+<!-- footer end -->
+<!-- all js here -->
+<div th:replace="web/common/header :: body-bottom-scripts"/>
+</div>
+
+<div class="loader-wrapper">
+    <span class="loader"><span class="loader-inner"></span></span>
+</div>
+<script>
+    $(window).on("load",function(){
+        $(".loader-wrapper").fadeOut("slow");
+    });
+</script>
 </body>
 </html>

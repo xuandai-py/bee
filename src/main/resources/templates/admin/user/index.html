@@ -21,7 +21,7 @@
 				<li><a href="#">Page 1</a></li>
 				<li><a href="#">Page 2</a></li>
 			</ul>
-			<form class="navbar-form navbar-right" th:action="@{/admin/user/search/page/1}">
+			<form class="navbar-form navbar-right" th:action="@{/admin/employee/search/page/1}">
 				<div class="form-group">
 					<input type="text" class="form-control" name="keyword" id="keyword"
 						size="50" th:value="${keyword}">
@@ -39,7 +39,7 @@
 			<span th:text="${success}"></span>
 		</div>
 
-		<a href="/admin/user/add" class="btn btn-success">Add User</a>
+		<a href="/admin/employee/add" class="btn btn-success">Add User</a>
 
 		<table class="table table-active">
 			<tr>
@@ -57,25 +57,25 @@
 				<th>Role</th>
 				<th>Actions</th>
 			</tr>
-			<tr th:each="user,iterStat  : ${users}">
+			<tr th:each="employee,iterStat  : ${users}">
 				<td th:text="${iterStat.count}"></td>
-				<td th:text="${user.userID}"></td>
-				<td th:text="${user.username}"></td>
-				<td th:text="${user.password}"></td>
-				<td th:text="${user.fullname}"></td>
-				<td th:text="${#temporals.format(user.birthday, 'dd/MM/yyyy')}"></td>
-				<td th:text="${user.address}"></td>
-				<td th:text="${user.email}"></td>
-				<td th:text="${user.phone}"></td>
+				<td th:text="${employee.userID}"></td>
+				<td th:text="${employee.username}"></td>
+				<td th:text="${employee.password}"></td>
+				<td th:text="${employee.fullname}"></td>
+				<td th:text="${#temporals.format(employee.birthday, 'dd/MM/yyyy')}"></td>
+				<td th:text="${employee.address}"></td>
+				<td th:text="${employee.email}"></td>
+				<td th:text="${employee.phone}"></td>
 				<td>
-					<span th:if="${user.gender == 0}">Male</span> 
-					<span th:unless="${user.gender == 0}">Female</span>
+					<span th:if="${employee.gender == 0}">Male</span>
+					<span th:unless="${employee.gender == 0}">Female</span>
 				</td>
-				<td><img style="border-radius: 50%" width="50"  height="50" th:src="@{'/getimage/' + ${user.image}}"/></td>
-				<td th:text="${user.roles.roleName}"></td>
+				<td><img style="border-radius: 50%" width="50"  height="50" th:src="@{'/getimage/' + ${employee.image}}"/></td>
+				<td th:text="${employee.roles.roleName}"></td>
 				<td>
-					<a th:href="@{/admin/user/edit?userID={userID}(userID=${user.userID})}" class="btn btn-primary">Edit</a> 
-					<a th:href="@{/admin/user/delete?userID={userID}(userID=${user.userID})}" class="btn btn-danger">Delete</a>
+					<a th:href="@{/admin/employee/edit?userID={userID}(userID=${employee.userID})}" class="btn btn-primary">Edit</a>
+					<a th:href="@{/admin/employee/delete?userID={userID}(userID=${employee.userID})}" class="btn btn-danger">Delete</a>
 				</td>
 			</tr>
 		</table>
@@ -83,23 +83,23 @@
 			<ul class="pagination">
 				<li><a>Tổng số: [[${totalItems}]]</a></li>
 				<li th:class="${currentPage == 1} ? 'page-item disabled' : 'page-item'">
-					<a th:if="${currentPage > 1}" th:href="@{'/admin/user/page/' + ${1}}">First</a>
+					<a th:if="${currentPage > 1}" th:href="@{'/admin/employee/page/' + ${1}}">First</a>
 					<a th:unless="${currentPage > 1}">First</a>
 				<li>
 				<li th:class="${currentPage == 1} ? 'page-item disabled' : 'page-item'">
-					<a th:if="${currentPage > 1}" th:href="@{'/admin/user/page/' + ${currentPage - 1}}">Previous</a> 
+					<a th:if="${currentPage > 1}" th:href="@{'/admin/employee/page/' + ${currentPage - 1}}">Previous</a>
 					<a th:unless="${currentPage > 1}">Previous</a>
 				</li>
 				<li th:each="i: ${#numbers.sequence(1, totalPages)}" th:class="${currentPage == i ? 'page-item active' : 'page-item'}">
-					<a th:if="${currentPage != i}" th:href="@{'/admin/user/page/' + ${i}}" th:text="${i}"></a> 
+					<a th:if="${currentPage != i}" th:href="@{'/admin/employee/page/' + ${i}}" th:text="${i}"></a>
 					<a th:unless="${currentPage != i}" th:text="${i}"></a>
 				</li>
 				<li th:class="${currentPage == totalPages} ? 'page-item disabled' : 'page-item'">
-					<a th:if="${currentPage < totalPages}" th:href="@{'/admin/user/page/' + ${currentPage + 1}}">Next</a> 
+					<a th:if="${currentPage < totalPages}" th:href="@{'/admin/employee/page/' + ${currentPage + 1}}">Next</a>
 					<a th:unless="${currentPage < totalPages}">Next</a>
 				</li>
 				<li th:class="${currentPage == totalPages} ? 'page-item disabled' : 'page-item'">
-					<a th:if="${currentPage < totalPages}" th:href="@{'/admin/user/page/' + ${totalPages}}">Last</a> 
+					<a th:if="${currentPage < totalPages}" th:href="@{'/admin/employee/page/' + ${totalPages}}">Last</a>
 					<a th:unless="${currentPage < totalPages}">Last</a>
 				</li>
 			</ul>

@@ -19,8 +19,8 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 	private ManufacturerRepository manufacturerRepository;
 
 	@Override
-	public List<Manufacturer> findAll() {
-		return manufacturerRepository.findAll();
+	public List<Manufacturer> getAll() {
+		return manufacturerRepository.getAll();
 	}
 
 	@Override
@@ -39,10 +39,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 	}
 
 	@Override
-	public Page<Manufacturer> findPaginated(int pageNo, int pageSize) {
-		PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
-		return manufacturerRepository.getAllManufacturer(pageable);
+	public List<Manufacturer> findByName(String manufacturerName) {
+		return manufacturerRepository.findByName(manufacturerName);
 	}
-
-	
 }

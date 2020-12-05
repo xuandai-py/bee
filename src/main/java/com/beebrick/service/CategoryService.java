@@ -8,8 +8,8 @@ import org.springframework.data.domain.Page;
 import com.beebrick.entity.Category;
 
 public interface CategoryService {
-	
-	List<Category> findAll();
+
+	List<Category> getAll();
 
 	void save(Category category);
 
@@ -17,5 +17,5 @@ public interface CategoryService {
 
 	Optional<Category> findById(Integer categoryID);
 
-	Page<Category> findPaginated(int pageNo, int pageSize);
+	List<Category> findByName(String categoryName);
 }

@@ -5,6 +5,7 @@
 <!--<div id="fb-root"></div>-->
 
 <body>
+<div class="content">
 
     <!-- Add your site or application content here -->
     <!-- Load Facebook SDK for JavaScript -->
@@ -130,21 +131,23 @@
                 </div>
                 <div class="row">
                     <div class="features_product_active owl-carousel">
-                        <div th:each="product,iterStat  : ${products}">
+                        <div th:each="product : ${products}">
                             <div class="col-lg-2">
                             <div class="single__product">
                                 <div class="single_product__inner">
                                     <span class="new_badge">new</span>
                                     <div class="product_img">
-                                        <a href="#">
-                                            <img src="assets/img/product/duckoo-tropical-island-blind-box-series-by-chokocider-x-pop-mart-the-toy-chronicle-2020.jpg"
-                                                 alt="">
+                                        <a th:href="@{/web/product-detail?productID={productID}(productID=${product.productID})}">
+                                            <img th:src="@{'/getimage/' + ${product.image}}" />
                                         </a>
                                     </div>
                                     <div class="product__content text-center">
                                         <div class="produc_desc_info">
                                             <div class="product_title">
-                                                <h4><a href="#" th:text="${product.productName}"></a>
+                                                <h4>
+                                                    <a
+                                                            th:href="@{/web/product-detail?productID={productID}(productID=${product.productID})}"
+                                                            th:text="${product.productName}"></a>
                                                 </h4>
                                             </div>
                                             <div class="product_price">
@@ -157,15 +160,15 @@
                                                 <li><a class="cart-fore" href="#" data-toggle="modal"
                                                        data-target="#my_modal" title="Quick View"><i
                                                         class="ion-android-open"></i></a></li>
-                                                <li><a href="product-details.html"><i class="ion-clipboard"></i></a>
-                                                </li>
+                                                <li><a href="product-detail.html"><i
+                                                        class="ion-clipboard"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        </div>
+                        <!--                         </div> -->
                     </div>
                 </div>
             </div>
@@ -182,35 +185,38 @@
         </div>
         <div class="row">
             <div class="features_product_active owl-carousel">
-                <div th:each="product,iterStat  : ${products}">
-                <div class="col-lg-2">
+
+                <div class="col-lg-2" th:each="product,iterStat  : ${products}">
                     <div class="single__product">
                         <div class="single_product__inner">
                             <div class="product_img">
-                                <a href="#">
-                                    <img src="assets/img/product/8in-tadodremon-blue-websiteproductimages-front-1600x-2.jpg" alt="">
+                                <a href="#"><img th:src="@{'/getimage/' + ${product.image}}">
                                 </a>
                             </div>
                             <div class="product__content text-center">
-                                <div class="produc_desc_info">
+                                <div class="product_desc_info">
                                     <div class="product_title">
-                                        <h4><a href="#" th:text="${product.productName}"></a></h4>
+                                        <h4>
+                                            <a href="#" th:text="${product.productName}">th:text="${product.productName}"</a>
+                                        </h4>
                                     </div>
                                     <div class="product_price">
-                                        <p th:text="${product.price}"></p>
+                                        <p th:text="${product.price}">th:text="${product.price}"</p>
                                     </div>
                                 </div>
                                 <div class="product__hover">
                                     <ul>
                                         <li><a href="#"><i class="ion-android-cart"></i></a></li>
-                                        <li><a class="cart-fore" href="#" data-toggle="modal" data-target="#my_modal" title="Quick View"><i class="ion-android-open"></i></a></li>
-                                        <li><a href="product-details.html"><i class="ion-clipboard"></i></a></li>
+                                        <li><a class="cart-fore" href="#" data-toggle="modal"
+                                               data-target="#my_modal" title="Quick View"><i
+                                                class="ion-android-open"></i></a></li>
+                                        <li><a href="product-detail.html"><i
+                                                class="ion-clipboard"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
@@ -224,6 +230,16 @@
     <!-- footer end -->
     <!-- all js here -->
     <div th:replace="web/common/header :: body-bottom-scripts"/>
-</body>
 
+</div>
+
+<div class="loader-wrapper">
+    <span class="loader"><span class="loader-inner"></span></span>
+</div>
+<script>
+    $(window).on("load",function(){
+        $(".loader-wrapper").fadeOut("slow");
+    });
+</script>
+</body>
 </html>

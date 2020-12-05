@@ -20,7 +20,7 @@ public class ShoppingCart {
     private List<CartItem> cartItemList;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private User user;
+    private Customer customers;
 
     public int getId() {
         return id;
@@ -46,13 +46,11 @@ public class ShoppingCart {
         this.cartItemList = cartItemList;
     }
 
-    public User getUser() {
-        return user;
+    public Customer getCustomer() {
+        return customers;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCustomer(Customer customer) {
+        this.customers = customer;
     }
-
-
 }

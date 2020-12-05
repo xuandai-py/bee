@@ -10,51 +10,58 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name = "manufacturer")
+@Table(name = "manufactures")
 public class Manufacturer {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ManufacturerID")
 	private Integer manufacturerID;
-	
+
+	@NotBlank(message = "Please enter manufacturer name")
 	@Column(name = "ManufacturerName")
 	private String manufacturerName;
-	
+
+	@NotBlank(message = "Please enter manufacturer address")
 	@Column(name = "ManufacturerAddress")
 	private String manufacturerAddress;
-	
+
+	@Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,63}$", message = "Please enter the correct email format")
 	@Column(name = "ManufacturerEmail")
 	private String manufacturerEmail;
-	
+
+	@Pattern(regexp="([0][0-9]{9})", message = "Please enter the correct phone number format")
 	@Column(name = "ManufacturerPhone")
 	private String manufacturerPhone;
-	
+
 	@Column(name = "Description", length = 2000)
 	private String description;
-	
+
 	@Column(name = "IsActive")
 	private boolean isActive;
-	
+
 	@Column(name = "CreatedDate", updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdDate;
-	
+
 	@Column(name = "ModifiedDate")
 	@UpdateTimestamp
 	private LocalDateTime modifiedDate;
-	
+
 	@Column(name = "CreatedBy", updatable = false)
 	private String createdBy;
-	
+
 	@Column(name = "ModifiedBy")
 	private String modifiedBy;
-	
+
 	@OneToMany(mappedBy = "manufacturer")
 	private List<Product> product;
 
@@ -153,4 +160,6 @@ public class Manufacturer {
 	public void setProduct(List<Product> product) {
 		this.product = product;
 	}
+
+
 }

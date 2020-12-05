@@ -1,3 +1,4 @@
+/*
 package com.beebrick.config;
 
 import com.beebrick.controller.CustomAuthenticationFailureHandler;
@@ -54,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().and().formLogin()
                 .loginProcessingUrl("/j_spring_security_login")
                 .loginPage("/login")
-                .defaultSuccessUrl("/admin/user/list")
+                .defaultSuccessUrl("/admin/user/page/1")
                 .failureHandler(customAuthenticationFailureHandler)
                 .usernameParameter("username")
                 .passwordParameter("password")
@@ -67,3 +68,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
+*/

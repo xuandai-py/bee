@@ -12,9 +12,9 @@
 				<h2 style="text-align: center;">Edit User</h2>
 			</div>
 <<<<<<< Updated upstream
-		    <form th:object="${user}" th:action="@{/admin/user/update}" action="#" method="post" enctype="multipart/form-data">
+		    <form th:object="${employee}" th:action="@{/admin/employee/update}" action="#" method="post" enctype="multipart/form-data">
 =======
-		    <form th:object="${user}" th:action="@{/admin/user/save}"  method="post" enctype="multipart/form-data">
+		    <form th:object="${employee}" th:action="@{/admin/employee/save}"  method="post" enctype="multipart/form-data">
 >>>>>>> Stashed changes
 		    	<div class="card-body">
 			        <input type="hidden" th:field="*{userID}">
@@ -63,7 +63,7 @@
 			        <div style="clear: both; display: block; height: 10px"></div>
 			        <div>
 			            <label th:text="Image" th:for="photo_file"></label>
-			            <img id="photo" style="border-radius: 50%" width="50"  height="50" th:src="@{'/getimage/' + ${user.image}}"/>
+			            <img id="photo" style="border-radius: 50%" width="50"  height="50" th:src="@{'/getimage/' + ${employee.image}}"/>
 			            <input type="file" class="form-control" name="photo_file" id="photo_file"/>
 			            <input type="hidden" th:field="*{image}"/>
 			        </div>

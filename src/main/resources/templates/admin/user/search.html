@@ -43,14 +43,14 @@
 				<th>Phone</th>
 				<th>Actions</th>
 			</tr>
-			<tr th:each="user : ${users}">
-				<td th:text="${user.id}"></td>
-				<td th:text="${user.firstName}"></td>
-				<td th:text="${user.lastName}"></td>
-				<td th:text="${user.email}"></td>
+			<tr th:each="employee : ${users}">
+				<td th:text="${employee.id}"></td>
+				<td th:text="${employee.firstName}"></td>
+				<td th:text="${employee.lastName}"></td>
+				<td th:text="${employee.email}"></td>
 				<td>
-					<a th:href="@{/edit?id={id}(id=${user.id})}" class="btn btn-primary">Edit</a> 
-					<a th:href="@{/delete?id={id}(id=${user.id})}" class="btn btn-danger">Delete</a>
+					<a th:href="@{/edit?id={id}(id=${employee.id})}" class="btn btn-primary">Edit</a>
+					<a th:href="@{/delete?id={id}(id=${employee.id})}" class="btn btn-danger">Delete</a>
 				</td>
 			</tr>
 		</table>

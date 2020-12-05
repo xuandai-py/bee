@@ -24,23 +24,11 @@ public class ManufacturerController {
 	@Autowired
 	private ManufacturerService manufacturerService;
 
-	@GetMapping("admin/manufacturer/page/{pageNo}")
-	public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model) {
-		int pageSize = 5;
-		
-		Page<Manufacturer> page = manufacturerService.findPaginated(pageNo, pageSize);
-		List<Manufacturer> manufacturers = page.getContent();
-
-		model.addAttribute("currentPage", pageNo);
-		model.addAttribute("totalPages", page.getTotalPages());
-		model.addAttribute("totalItems", page.getTotalElements());
+	@RequestMapping(value = "admin/manufacturer")
+	public String index(Model model) {
+		List<Manufacturer> manufacturers = manufacturerService.getAll();
 		model.addAttribute("manufacturers", manufacturers);
 		return "admin/manufacturer/index";
-	}
-
-	@RequestMapping("admin/manufacturer")
-	public String index(Model model) {
-		return "redirect:/admin/manufacturer/page/1";
 	}
 
 	@RequestMapping(value = "admin/manufacturer/add")
@@ -48,14 +36,20 @@ public class ManufacturerController {
 		model.addAttribute("manufacturer", new Manufacturer());
 		return "admin/manufacturer/add";
 	}
-	
+
 	@RequestMapping(value = "admin/manufacturer/save", method = RequestMethod.POST)
-	public String save(@Valid Manufacturer manufacturer, BindingResult bindingResult) {
+	public String save(@Valid Manufacturer manufacturer, BindingResult bindingResult, Model model, String manufacturerName) {
+		List<Manufacturer> list = manufacturerService.findByName(manufacturerName);
+		if(!list.isEmpty()) {
+			manufacturer.setManufacturerName(null);;
+			model.addAttribute("message", "Manufacturer Name is already exists!");
+			return "admin/manufacturer/add";
+		}
 		if (bindingResult.hasErrors()) {
 			return "admin/manufacturer/add";
 		} else {
 			manufacturerService.save(manufacturer);
-			return "redirect:/admin/manufacturer/page/1";
+			return "redirect:/admin/manufacturer";
 		}
 	}
 
@@ -72,13 +66,13 @@ public class ManufacturerController {
 			return "admin/manufacturer/edit";
 		} else {
 			manufacturerService.save(manufacturer);
-			return "redirect:/admin/manufacturer/page/1";
+			return "redirect:/admin/manufacturer";
 		}
 	}
 
 	@RequestMapping(value = "admin/manufacturer/delete", method = RequestMethod.GET)
 	public String delete(@RequestParam("manufacturerID") Integer manufacturerID, Model model) {
 		manufacturerService.delete(manufacturerID);
-		return "redirect:/admin/manufacturer/page/1";
+		return "redirect:/admin/manufacturer";
 	}
 }

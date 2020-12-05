@@ -21,10 +21,10 @@
                         <!-- Nav tabs -->
                         <ul role="tablist" class="nav flex-column dashboard-list">
                             <li><a href="#dashboard" data-toggle="tab" class="nav-link active">Dashboard</a></li>
-                            <li> <a href="#orders" data-toggle="tab" class="nav-link">Orders</a></li>
-                            <li><a href="#downloads" data-toggle="tab" class="nav-link">Downloads</a></li>
-                            <li><a href="#address" data-toggle="tab" class="nav-link">Addresses</a></li>
-                            <li><a href="#account-details" data-toggle="tab" class="nav-link">Account details</a></li>
+                            <li th:classappend="${classActiveOrders}? 'active'"> <a href="#orders" data-toggle="tab" class="nav-link">Orders</a></li>
+                            <li th:classappend="${classActiveBilling}? 'active'"><a href="#downloads" data-toggle="tab" class="nav-link">Billings</a></li>
+                            <li th:classappend="${classActiveShipping}? 'active'"><a href="#address" data-toggle="tab" class="nav-link">Shipping</a></li>
+                            <li th:classappend="${classActiveEdit}? 'active'"><a href="#account-details" data-toggle="tab" class="nav-link">Account details</a></li>
                             <li><a href="login.html" class="nav-link">logout</a></li>
                         </ul>
                     </div>
@@ -32,7 +32,7 @@
                         <!-- Tab panes -->
                         <div class="tab-content dashboard-content">
                             <div class="tab-pane fade show active" id="dashboard">
-                                <h3>Dashboard </h3>
+                                <h3>Hello: <span th:text="${#strings.toUppserCase{customer.username}}"></span></h3>
                                 <p>From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a href="#">Edit your password and account details.</a></p>
                             </div>
                             <div class="tab-pane fade" id="orders">
@@ -111,40 +111,40 @@
 	                                    </address>
                                 <p>Bangladesh</p>
                             </div>
-                            <div class="tab-pane fade" id="account-details">
+                            <div class="tab-pane fade" id="account-details" th:classappend="${classActiveEdit}? 'in active'">
                                 <h3>Account details </h3>
                                 <div class="login">
                                     <div class="login-form-container">
                                         <div class="account-login-form">
-                                            <form action="#">
+                                            <form th:action="@{/updateCustomerInfo}" method="post">
                                                 <p>Already have an account? <a href="#">Log in instead!</a></p>
+                                                <input type="hidden" name="id" th:value="${customer.CustomerID}">
+                                                <div class="bg-info" th:if="${updateCustomerInfo}">User info updated</div>
+
                                                 <div class="input-radio">
                                                     <span class="custom-radio"><input type="radio" value="1" name="id_gender"> Mr.</span>
                                                     <span class="custom-radio"><input type="radio" value="1" name="id_gender"> Mrs.</span>
                                                 </div> <br>
-                                                <label>First Name</label>
-                                                <input type="text" name="first-name">
-                                                <label>Last Name</label>
-                                                <input type="text" name="last-name">
-                                                <label>Email</label>
-                                                <input type="text" name="email-name">
-                                                <label>Password</label>
-                                                <input type="password" name="user-password">
-                                                <label>Birthdate</label>
-                                                <input type="text" placeholder="MM/DD/YYYY" value="" name="birthday">
-                                                <span class="example">
-	                                                      (E.g.: 05/31/1970)
-	                                                    </span>
-                                                <span class="custom-checkbox">
-	                                                        <input type="checkbox" value="1" name="optin">
-	                                                        <label>Receive offers from our partners</label>
-	                                                    </span>
-                                                <span class="custom-checkbox">
-	                                                        <input type="checkbox" value="1" name="newsletter">
-	                                                        <label>Sign up for our newsletter<br><em>You may unsubscribe at any moment. For that purpose, please find our contact info in the legal notice.</em></label>
-	                                                    </span>
+                                                <label for="full-name">FullName</label>
+                                                <input type="text" name="full-name" id="full-name" th:value="${customer.fullname}"/>
+
+                                                <label for="email-name">Email</label>
+                                                <input type="text" name="email-name" id="email-name" th:value="${customer.email}"/>
+
+                                                <label for="userName">UserName</label>
+                                                <input type="text" name="userName" id="userName" th:value="${customer.username}"/>
+
+                                                <label for="currentPassword">Current Password</label>
+                                                <input type="password" name="currentPassword" id="currentPassword"/>
+
+                                                <label for="newPassword">New Password</label>
+                                                <input type="password" name="newPassword" id="newPassword"/>
+
+                                                <label for="confirmPassword">Confirm Password</label>
+                                                <input type="password" name="confirmPassword" id="confirmPassword"/>
+
                                                 <div class="save-button primary-btn default-button">
-                                                    <a href="#">Save</a>
+                                                    <a href="#">Save changes</a>
                                                 </div>
                                             </form>
                                         </div>

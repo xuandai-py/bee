@@ -10,42 +10,44 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name = "category")
+@Table(name = "categories")
 public class Category {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CategoryID")
 	private Integer categoryID;
-	
+
+	@NotBlank(message = "Please enter category name")
 	@Column(name = "CategoryName")
 	private String categoryName;
-	
+
 	@Column(name = "Description", length = 2000)
 	private String description;
-	
+
 	@Column(name = "IsActive")
 	private boolean isActive;
-	
+
 	@Column(name = "CreatedDate", updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdDate;
-	
+
 	@Column(name = "ModifiedDate")
 	@UpdateTimestamp
 	private LocalDateTime modifiedDate;
-	
+
 	@Column(name = "CreatedBy", updatable = false)
 	private String createdBy;
-	
+
 	@Column(name = "ModifiedBy")
 	private String modifiedBy;
-	
+
 	@OneToMany(mappedBy = "category")
 	private List<Product> product;
 
@@ -120,4 +122,6 @@ public class Category {
 	public void setProduct(List<Product> product) {
 		this.product = product;
 	}
+
+
 }

@@ -9,14 +9,13 @@ import com.beebrick.entity.Product;
 
 public interface ProductService {
 
+	List<Product> getAll();
+
 	void save(Product product);
-	
+
 	void delete(Integer productID);
 
 	Optional<Product> findById(Integer productID);
-	List<Product> findAll();
 
-	Optional<Product> findProductById(Integer productID);
-
-	Page<Product> findPaginated(int pageNo, int pageSize);
+	public List<Product> getAllRandom();
 }

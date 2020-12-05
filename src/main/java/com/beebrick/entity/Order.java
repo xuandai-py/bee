@@ -4,15 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "orders")
@@ -31,8 +23,8 @@ public class Order {
 	
 	@Column(name = "Status")
 	private boolean status;
-	
-	@Column(name = "DeliveryFee")
+
+	/*@Column(name = "DeliveryFee")
 	private double deliveryFee;
 	
 	@Column(name = "DeliveryAddress")
@@ -45,11 +37,19 @@ public class Order {
 	private String phoneReceiver;
 	
 	@Column(name = "Description")
-	private String description;
-	
+	private String description;*/
+	@OneToMany(mappedBy = "order", cascade= CascadeType.ALL)
+	private List<CartItem> cartItemList;
+
+	@OneToOne(cascade=CascadeType.ALL)
+	private ShippingAddress shippingAddress;
+
+	@OneToOne(cascade=CascadeType.ALL)
+	private BillingAddress billingAddress;
+
 	@ManyToOne
-	@JoinColumn(name = "UserID")
-	private User users;
+	@JoinColumn(name = "CustomerID")
+	private Customer customers;
 	
 	@ManyToOne
 	@JoinColumn(name = "PaymentID")
@@ -58,8 +58,8 @@ public class Order {
 	@OneToMany(mappedBy = "OrderID")
 	Set<OrderDetail> orderDetail;
 
-	@OneToMany(mappedBy = "orders")
-	private List<Shipment> shipment;
+	/*@OneToMany(mappedBy = "orders")
+	private List<Shipment> shipment;*/
 
 	public Integer getOrderID() {
 		return orderID;
@@ -93,52 +93,36 @@ public class Order {
 		this.status = status;
 	}
 
-	public double getDeliveryFee() {
-		return deliveryFee;
+	public List<CartItem> getCartItemList() {
+		return cartItemList;
 	}
 
-	public void setDeliveryFee(double deliveryFee) {
-		this.deliveryFee = deliveryFee;
+	public void setCartItemList(List<CartItem> cartItemList) {
+		this.cartItemList = cartItemList;
 	}
 
-	public String getDeliveryAddress() {
-		return deliveryAddress;
+	public ShippingAddress getShippingAddress() {
+		return shippingAddress;
 	}
 
-	public void setDeliveryAddress(String deliveryAddress) {
-		this.deliveryAddress = deliveryAddress;
+	public void setShippingAddress(ShippingAddress shippingAddress) {
+		this.shippingAddress = shippingAddress;
 	}
 
-	public String getNameReceiver() {
-		return nameReceiver;
+	public BillingAddress getBillingAddress() {
+		return billingAddress;
 	}
 
-	public void setNameReceiver(String nameReceiver) {
-		this.nameReceiver = nameReceiver;
+	public void setBillingAddress(BillingAddress billingAddress) {
+		this.billingAddress = billingAddress;
 	}
 
-	public String getPhoneReceiver() {
-		return phoneReceiver;
+	public Customer getCustomer() {
+		return customers;
 	}
 
-	public void setPhoneReceiver(String phoneReceiver) {
-		this.phoneReceiver = phoneReceiver;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public User getUsers() {
-		return users;
-	}
-
-	public void setUsers(User users) {
-		this.users = users;
+	public void setCustomer(Customer customer) {
+		this.customers = customer;
 	}
 
 	public Payment getPayment() {
@@ -155,13 +139,5 @@ public class Order {
 
 	public void setOrderDetail(Set<OrderDetail> orderDetail) {
 		this.orderDetail = orderDetail;
-	}
-
-	public List<Shipment> getShipment() {
-		return shipment;
-	}
-
-	public void setShipment(List<Shipment> shipment) {
-		this.shipment = shipment;
 	}
 }
