@@ -17,5 +17,8 @@ public interface ProductService {
 
 	Optional<Product> findById(Integer productID);
 
+	Product findByProductID(Integer productID);
+
+
 	public List<Product> getAllRandom();
 }

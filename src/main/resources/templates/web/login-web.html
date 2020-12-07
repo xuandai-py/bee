@@ -10,90 +10,149 @@
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/login.css">
+    <style>
+
+        @media (min-width: 576px) {
+            .rounded-nav {
+                border-radius: 50rem !important;
+            }
+        }
+
+        @media (min-width: 576px) {
+            .rounded-nav .nav-link {
+                border-radius: 50rem !important;
+            }
+        }
+
+        /* With arrow tabs */
+
+        .with-arrow .nav-link.active {
+            position: relative;
+        }
+
+        .with-arrow .nav-link.active::after {
+            content: '';
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid #2b90d9;
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: block;
+        }
+
+        /* lined tabs */
+
+        .lined .nav-link {
+            border: none;
+            border-bottom: 3px solid transparent;
+        }
+
+        .lined .nav-link:hover {
+            border: none;
+            border-bottom: 3px solid transparent;
+        }
+
+        .lined .nav-link.active {
+            background: none;
+            color: #555;
+            border-color: #2b90d9;
+        }
+
+
+    </style>
 </head>
 <body>
 <main>
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6 login-section-wrapper">
+                <div class="p-5 bg-white rounded shadow mb-5">
+
                 <div class="brand-wrapper">
                     <img src="images/logo-1.png" alt="logo" width="200px" height="auto">
                 </div>
+                    <br/><br/>
 
                 <!-- Nav tabs -->
-                <ul class="nav nav-tabs">
-                    <li th:classappend="${classActiveNewAccount}? 'active'"><a
-                            href="#tab-1" data-toggle="tab"><span style="color: red;">Create
-								new account</span></a></li>
-                    <li th:classappend="${classActiveLogin}? 'active'"><a
-                            href="#tab-2" data-toggle="tab"><span style="color: red;">Log
-								in</span></a></li>
-                    <li th:classappend="${classActiveForgetPassword}? 'active'"><a
-                            href="#tab-3" data-toggle="tab"><span style="color: red;">Forget
-								Password</span></a></li>
-                </ul>
+                    <ul id="myTab" role="tablist" class="nav nav-tabs nav-pills flex-column flex-sm-row text-center bg-light border-0 rounded-nav">
+                        <li class="nav-item flex-sm-fill" th:classappend="${classActiveNewAccount}? 'active'">
+                            <a id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" class="nav-link border-0 text-uppercase font-weight-bold active">
+                                Create new account
+                            </a></li>
+                        <li class="nav-item flex-sm-fill" th:classappend="${classActiveLogin}? 'active'">
+                            <a id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold">
+                                Login
+                            </a></li>
+                        <li class="nav-item flex-sm-fill" th:classappend="${classActiveForgetPassword}? 'active'">
+                            <a id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold">
+                                Forgot password
+                            </a></li>
+                    </ul>
 
-                <!-- Tab panels -->
-                <div class="tab-content">
+                    <!-- Tab panels -->
+                    <div class="tab-content" id="myTabContent">
 
-                    <div class="tab-pane fade" id="tab-1"
-                         th:classappend="${classActiveNewAccount}? 'in active'">
-                        <div class="login-wrapper my-auto">
-                           <!-- <h3><p th:text="${message}"></p></h3>-->
-                            <div class="alert alert-info" th:if="${emailSent}">An
-                                email has been sent to the email address you just registered.
-                                Please validate your email address and update your password
-                                information.</div>
-                            <form name='signup-form' th:action="@{/web-newUser}" method='POST'>
-                                <div class="form-group">
-                                    <label for="username">Username</label>
-                                    <input type='text' id="username" name='username' value='' class="form-control" placeholder="example">
-                                    <span style="color: red;" th:if="${usernameExists}">Username already exists. Choose a different one.</span>
-                                </div>
-                                <div class="form-group mb-4">
-                                    <label for="email">Enail Address</label>
-                                    <input type=email id="email" name='email'  class="form-control" placeholder="enter your email address" />
-                                    <span style="color: red;" th:if="${emailExists}">Email already exists. Choose a different one.</span>
-                                </div>
-                                <input name="submit" id="login" class="btn btn-block login-btn" type="submit" value="Create new account">
-                            </form>
+                        <div id="home" role="tabpanel" aria-labelledby="home-tab" class="tab-pane fade px-4 py-5"
+                             th:classappend="${classActiveNewAccount}? 'in active'">
+                            <div class="login-wrapper my-auto">
+                               <!-- <h3><p th:text="${message}"></p></h3>-->
+                                <div class="alert alert-info" th:if="${emailSent}">An
+                                    email has been sent to the email address you just registered.
+                                    Please validate your email address and update your password
+                                    information.</div>
+                                <form name='signup-form' th:action="@{/web-newUser}" method="post">
+                                    <div class="form-group">
+                                        <label for="newusername">Username</label>
+                                        <input type="text" id="newusername" name='username'  class="form-control" placeholder="example"/>
+                                        <span style="color: red;" th:if="${usernameExists}">Username already exists. Choose a different one.</span>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="email">Enail Address</label>
+                                        <input type="email" id="email" name='email'  class="form-control" placeholder="enter your email address" />
+                                        <span style="color: red;" th:if="${emailExists}">Email already exists. Choose a different one.</span>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Create new account</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="tab-pane fade" id="tab-2"
-                         th:classappend="${classActiveLogin}? 'in active'">
-                        <div class="login-wrapper my-auto">
+                        <div id="profile" role="tabpanel" aria-labelledby="profile-tab" class="tab-pane fade px-4 py-5"
+                             th:classappend="${classActiveLogin}? 'in active'">
+                            <div class="login-wrapper my-auto">
 
-                            <div th:if="${param.error != null}" style="color:red;">Incorrect username or password.</div>
-                            <form name='login-form' th:action="@{/web-login}" method='POST'>
-                                <div class="form-group">
-                                    <label for="username">Email</label>
-                                    <input type='text' id="username" name='username' value='' class="form-control" placeholder="email@example.com">
-                                </div>
-                                <div class="form-group mb-4">
-                                    <label for="password">Password</label>
-                                    <input type='password' id="password" name='password'  class="form-control" placeholder="enter your passsword" />
-                                </div>
-                                <input name="submit" class="btn btn-block login-btn" type="submit" value="Let me in">
-                            </form>
-                            <!--<a href="#!" class="forgot-password-link">Forgot password?</a>-->
+                                <div th:if="${param.error != null}" style="color:red;">Incorrect username or password.</div>
+                                <form th:action="@{/login}" method='post'>
+                                    <div class="form-group">
+                                        <label for="username">Email</label>
+                                        <input type="text" required="required" id="username" name='username'  class="form-control" placeholder="email@example.com">
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="password">Password</label>
+                                        <input type="password" required="required" id="password" name='password'  class="form-control" placeholder="enter your password" />
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Let me in</button>
+                                </form>
+                                <!--<a href="#!" class="forgot-password-link">Forgot password?</a>-->
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="tab-pane fade" id="tab-3"
-                         th:classappend="${classActiveForgetPassword}? 'in active'">
-                        <div class="login-wrapper my-auto">
+                        <div id="contact" role="tabpanel" aria-labelledby="contact-tab" class="tab-pane fade px-4 py-5"
+                            th:classappend="${classActiveForgetPassword}? 'in active'">
+                            <div class="login-wrapper my-auto">
 
-                            <div th:if="${emailNotExist}" class="alert alert-danger">Email doesn't exist.</div>
-                            <div th:if="${forgetPasswordEmailSent}" class="alert alert-success">Email sent.</div>
-                            <form name='login-form' th:action="@{/forgetPassword}" method='POST'>
-                                <div class="form-group">
-                                    <label for="recoverEmail">Email</label>
-                                    <input type='text' id="recoverEmail" name='recoverEmail' value='' class="form-control" placeholder="email@example.com">
-                                </div>
-                                <input name="submit"  class="btn btn-block login-btn" type="submit" value="Recover">
-                            </form>
-                            <a href="#!" class="forgot-password-link">Forgot password?</a>
+                                <div th:if="${emailNotExist}" class="alert alert-danger">Email doesn't exist.</div>
+                                <div th:if="${forgetPasswordEmailSent}" class="alert alert-success">Email sent.</div>
+                                <form name='login-form' th:action="@{/web-forgetPassword}" method='POST'>
+                                    <div class="form-group">
+                                        <label for="recoverEmail">Email to recover</label>
+                                        <input type=email id="recoverEmail" required="required" name="recoverEmail" class="form-control" placeholder="email@example.com">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Recover account</button>
+                                </form>
+                                <!--<a href="#!" class="forgot-password-link">Forgot password?</a>-->
+                            </div>
                         </div>
                     </div>
                 </div>

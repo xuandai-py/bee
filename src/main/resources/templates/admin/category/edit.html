@@ -18,12 +18,14 @@
 					<input type="hidden" th:field="*{categoryID}">
 					<div>
 			            <label th:text="CategoryName" th:for="categoryName"></label>
-			            <input type="text" th:field="*{categoryName}" class="form-control"/>
+			            <input type="text" th:field="*{categoryName}" class="form-control" id="CategoryName"/>
+			            <span th:if="${#fields.hasErrors('categoryName')}" th:errors="*{categoryName}" id="categoryName" class="error"></span>
+			            <span th:text=${message} id="categoryName" class="error"></span>
 			        </div>
 			        <div style="clear: both; display: block; height: 10px"></div>
 			        <div>
 			            <label th:text="Description" th:for="description"></label>
-			            <textarea th:field="*{description}" style="width: 620px; height: 175px" ></textarea>
+			            <textarea th:field="*{description}" rows="10" class="form-control"></textarea>
 			        </div>
 				</div>
 				<div class="card-footer">
@@ -32,6 +34,13 @@
 			</form>
 		</div>
 	</div>
-	
+	<script>
+		$("#CategoryName").on('input', function(){
+			var categoryName = document.getElementById("CategoryName").value;
+			if(categoryName != ""){
+				document.getElementById("categoryName").innerHTML = "";
+			}
+		});
+	</script>
 </body>
 </html>

@@ -22,12 +22,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCart updateShoppingCart(ShoppingCart shoppingCart) {
-        Double cartTotal = new Double(0);
+        BigDecimal cartTotal = new BigDecimal(0);
         List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
         for (CartItem cartItem : cartItemList){
             if(cartItem.getProduct().getQuantityInStock() > 0){
                 cartItemService.updateCartItem(cartItem);
-                cartTotal = cartItem.getSubtotal();
+                cartTotal = cartTotal.add(cartItem.getSubtotal());
             }
         }
 

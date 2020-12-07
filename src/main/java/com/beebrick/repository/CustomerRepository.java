@@ -12,11 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Repository
-public interface CustomerRepository extends JpaRepository<Customer, Integer> {
+public interface CustomerRepository extends JpaRepository<Customer, String> {
 
-    @Query(value = "SELECT * FROM customers WHERE IsActive = 0", nativeQuery = true)
+    @Query(value = "SELECT * FROM customers", nativeQuery = true)
     public Page<Customer> getAllCustomer(Pageable pageable);
+
+    @Query(value = "SELECT * FROM customers WHERE enabled = 1", nativeQuery = true)
+    public List<Customer> findAll();
 
     @Modifying
     @Transactional
@@ -28,6 +30,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
     @Query(value = "SELECT * FROM customers WHERE Username LIKE %?1% and IsActive = 0", nativeQuery = true)
     public List<Customer> search1(String pageable);
+
 
     Customer findByUsername(String username);
 

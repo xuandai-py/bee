@@ -1,3 +1,4 @@
+/*
 package com.beebrick.config;
 
 
@@ -15,7 +16,23 @@ public class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] CLASS_PATH = {
             "/assets/**",
             "/images/**",
-            "/web/**"
+            "/web/**",
+            "/admin/**",
+            "/assets/css/**",
+            "/assets/js/**",
+            "/assets/img/**",
+            "/assets/fonts/**",
+            "/ckeditor/**",
+            "/images/**",
+
+            "/web-login",
+            "/shop/**",
+            "/about-us",
+            "/contact",
+            "/login",
+            "/**",
+            "/web-newUser",
+            "/updateUserInfo"
     };
 
     @Override
@@ -28,3 +45,4 @@ public class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 }
+*/

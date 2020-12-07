@@ -3,11 +3,13 @@ package com.beebrick.entity;
 
 import com.beebrick.entity.Authority.AuthenticationProvider;
 import com.beebrick.entity.Authority.Authority;
+import com.beebrick.entity.Authority.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -25,6 +27,9 @@ public class Customer implements UserDetails{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="CustomerID", nullable = false, updatable = false)
     private Integer CustomerID;*/
+
+    //private final Set<GrantedAuthority> authorities = new HashSet<>();
+
 
     @Id
     @NotBlank(message = "Please enter username")
@@ -132,6 +137,12 @@ public class Customer implements UserDetails{
     @OneToMany(mappedBy = "customers")
     private List<Order> order;
 
+    @OneToMany(mappedBy = "customers", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<UserRole> userRoles = new HashSet<>();
+
+
+
 
 
     public String getFullname() {
@@ -200,22 +211,30 @@ public class Customer implements UserDetails{
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
+    }
+
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public void setUsername(String username) {
@@ -224,7 +243,10 @@ public class Customer implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        Set<GrantedAuthority> authorites = new HashSet<>();
+        userRoles.forEach(ur -> authorites.add(new Authority(ur.getRole().getName())));
+
+        return authorites;
     }
 
     public String getPassword() {

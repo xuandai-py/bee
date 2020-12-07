@@ -3,6 +3,7 @@ package com.beebrick.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private int qty;
-    private double subtotal;
+    private BigDecimal subtotal;
 
     @OneToOne
     private Product product;
@@ -30,12 +31,8 @@ public class CartItem {
     @JoinColumn(name="OrderID")
     private Order order;
 
-    public int getId() {
+    public Integer getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getQty() {
@@ -46,11 +43,15 @@ public class CartItem {
         this.qty = qty;
     }
 
-    public double getSubtotal() {
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public BigDecimal getSubtotal() {
         return subtotal;
     }
 
-    public void setSubtotal(double subtotal) {
+    public void setSubtotal(BigDecimal subtotal) {
         this.subtotal = subtotal;
     }
 

@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Add User</title>
 	<link type="text/css" rel="stylesheet" href="../../bootstrap.min.css"  />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<style>
 		.error{
 			color: red;
@@ -20,28 +21,32 @@
 				<div class="card-body">
 					<div>
 			            <label th:text="ProductName" th:for="productName"></label>
-			            <input type="text" th:field="*{productName}" class="form-control"/>
+			            <input type="text" th:field="*{productName}" class="form-control" id="ProductName"/>
+			            <span th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}" id="productName" class="error"></span>
 			        </div>
 			        <div style="clear: both; display: block; height: 10px"></div>
 			        <div>
 			            <label th:text="Image" th:for="image"></label>
 			            <input type="file" class="form-control" name="photo_file" id="photo_file"/>
+			            
 			        </div>
 			        <div style="clear: both; display: block; height: 10px"></div>
 			        <div>
 			            <label th:text="Price" th:for="price"></label>
-			            <input type="text" th:field="*{price}" class="form-control"/>
+			            <input type="text" th:field="*{price}" class="form-control" id="Price"/>
+			            <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" id="price" class="error"></span>
 			        </div>
 			        <div style="clear: both; display: block; height: 10px"></div>
 			        <div>
-			            <label th:text="Quantity" th:for="quantity"></label>
-			            <input type="number" th:field="*{quantity}" class="form-control"/>
+			            <label th:text="QuantityInStock" th:for="quantityInStock"></label>
+			            <input type="number" th:field="*{quantityInStock}" class="form-control" id="QuantityInStock"/>
+			            <span th:if="${#fields.hasErrors('quantityInStock')}" th:errors="*{quantityInStock}" id="quantityInStock" class="error"></span>
 			        </div>
 			        <div style="clear: both; display: block; height: 10px"></div>
 			        
 			        <div>
 			            <label th:text="Description" th:for="description"></label>
-			            <input type="text" th:field="*{description}" class="form-control"/>
+			            <textarea type="text" th:field="*{description}" rows="10" class="form-control"></textarea>
 			        </div>
 			        <div style="clear: both; display: block; height: 10px"></div>
 					<div>
@@ -66,5 +71,27 @@
 			</form>
 		</div>
 	</div>
+	<script>
+		$("#ProductName").on('input', function(){
+			var productName = document.getElementById("ProductName").value;
+			if(productName != ""){
+				document.getElementById("productName").innerHTML = "";
+			}
+		});
+		
+		$("#Price").on('input', function(){
+			var price = document.getElementById("Price").value;
+			if(price != ""){
+				document.getElementById("price").innerHTML = "";
+			}
+		});
+		
+		$("#QuantityInStock").on('input', function(){
+			var quantityInStock = document.getElementById("QuantityInStock").value;
+			if(quantityInStock != ""){
+				document.getElementById("quantityInStock").innerHTML = "";
+			}
+		});
+	</script>
 </body>
 </html>

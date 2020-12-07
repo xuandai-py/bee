@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+    <link type="text/css" rel="stylesheet" href="../../bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<style>
+		.error{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="container col-6">
+		<div class="card">
+			<div class="card-header">
+				<h2 style="text-align: center;">Edit User</h2>
+			</div>
+		    <form th:object="${employee}" th:action="@{/admin/employee/update}" action="#" method="post" enctype="multipart/form-data">
+		    	<div class="card-body">
+		    		<input type="hidden" th:field="*{username}"/>
+			        <div>
+			            <label th:text="Username" th:for="username"></label>
+			            <input type="text" th:field="*{username}" class="form-control" id="Username" disabled="disabled"/>        
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+			        <div>
+			            <label th:text="Password" th:for="password"></label>
+			            <input type="text" th:field="*{password}" class="form-control" id="Password" maxlength="20"/>
+			            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" id="password" class="error"></span>
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+			        <div>
+			            <label th:text="Fullname" th:for="fullname"></label>
+			            <input type="text" th:field="*{fullname}" class="form-control" id="Fullname"/>
+			            <span th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}" id="fullname" class="error"></span>
+
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+			        <div>
+			            <label th:text="Birthday" th:for="birthday"></label>
+			            <input type="date" th:field="*{birthday}" class="form-control" id="Birthday"/>
+			            <span th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}" id="birthday" class="error"></span>
+
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+			        <div>
+			            <label th:text="Address" th:for="address"></label>
+			            <input type="text" th:field="*{address}" class="form-control" id="Address"/>
+			            <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}" id="address" class="error"></span>
+
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+			        <div>
+			            <label th:text="Email" th:for="email"></label>
+			            <input type="text" th:field="*{email}" class="form-control" id="Email"/>
+			            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" id="email" class="error"></span>
+
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+					<div>
+			            <label th:text="PhoneNumber" th:for="phoneNumber"></label>
+			            <input type="text" th:field="*{phoneNumber}" class="form-control" id="PhoneNumber"/>
+			            <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" id="phoneNumber" class="error"></span>
+ 
+			        </div>
+			        <div style="clear: both; display: block; height: 10px"></div>
+			        <div>
+			            <label th:text="Gender" th:for="gender"></label>
+			            <select th:field="*{gender}" class="form-control">
+							<option value="0">Male</option>
+							<option value="1">Female</option>
+						</select>
+			        </div>
+			        
+			        <div style="clear: both; display: block; height: 10px"></div>
+			        <div>
+			            <label th:text="Image" th:for="photo_file"></label>
+			            <img id="photo" style="border-radius: 50%" width="50"  height="50" th:src="@{'/getimage/' + ${employee.image}}"/>
+			            <input type="file" class="form-control" name="photo_file" id="photo_file"/>
+			            <input type="hidden" th:field="*{image}"/>
+			        </div>
+			      
+					
+			    </div>
+		        <div class="card-footer">
+		        	<input type="submit" class="btn btn-success" value="Save"/>
+		        </div>
+		    </form>
+		</div>
+	</div>
+	 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	 <script>
+	 function readURL(input) {
+	        if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+	            
+	            reader.onload = function (e) {
+	                $('#photo').attr('src', e.target.result);
+	            }
+	            
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
+	    
+	    $("#photo_file").change(function(){
+	        readURL(this);
+	    });
+	    
+	    $("#Username").on('input', function(){
+			var username = document.getElementById("Username").value;
+			if(username != ""){
+				document.getElementById("username").innerHTML = "";
+			}
+		});
+		
+		$("#Password").on('input', function(){
+			var password = document.getElementById("Password").value;
+			if(password != ""){
+				document.getElementById("password").innerHTML = "";
+			}
+		});
+		
+		$("#Fullname").on('input', function(){
+			var fullname = document.getElementById("Fullname").value;
+			if(fullname != ""){
+				document.getElementById("fullname").innerHTML = "";
+			}
+		});
+		
+		$("#Birthday").on('input', function(){
+			var birthday = document.getElementById("Birthday").value;
+			if(birthday != ""){
+				document.getElementById("birthday").innerHTML = "";
+			}
+		});
+		
+		$("#Address").on('input', function(){
+			var address = document.getElementById("Address").value;
+			if(address != ""){
+				document.getElementById("address").innerHTML = "";
+			}
+		});
+		
+		$("#Email").on('input', function(){
+			var email = document.getElementById("Email").value;
+			if(email != ""){
+				document.getElementById("email").innerHTML = "";
+			}
+		});
+		
+		$("#PhoneNumber").on('input', function(){
+			var phoneNumber = document.getElementById("PhoneNumber").value;
+			if(phoneNumber != ""){
+				document.getElementById("phoneNumber").innerHTML = "";
+			}
+		});
+	 </script>
+</body>
+</html>

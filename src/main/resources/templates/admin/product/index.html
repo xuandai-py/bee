@@ -62,7 +62,7 @@
 				<td th:text="${product.productName}"></td>
 				<td><img style="border-radius: 50%" width="50"  height="50" th:src="@{'/getimage/' + ${product.image}}"/></td>
 				<td th:text="${product.price}"></td>
-				<td th:text="${product.quantity}"></td>
+				<td th:text="${product.quantityInStock}"></td>
 				<td th:text="${product.description}"></td>
 				<td th:text="${product.category.categoryName}"></td>
 				<td th:text="${product.manufacturer.manufacturerName}"></td>
@@ -72,7 +72,7 @@
 				</td>
 			</tr>
 		</table>
-		<th:block th:unless="${#lists.isEmpty(products)}">
+		<!-- <th:block th:unless="${#lists.isEmpty(products)}">
 			<ul class="pagination">
 				<li><a>Tổng số: [[${totalItems}]]</a></li>
 				<li
@@ -105,7 +105,7 @@
 					th:unless="${currentPage < totalPages}">Last</a>
 				</li>
 			</ul>
-		</th:block>
+		</th:block> -->
 	</div>
 </body>
 </html>

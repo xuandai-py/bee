@@ -77,7 +77,7 @@
                                     <li class="has-sub"><a href="#">Fresh Fruit </a>
                                         <ul class="categorie_sub">
                                             <li th:each="category : ${categories}"><a
-                                                    th:text="${category.categoryName}" th:href=@{/web/404}></a>
+                                                    th:text="${category.categoryName}" ></a>
                                             </li>
                                         </ul></li>
 
@@ -252,8 +252,7 @@
                                                 <span class="new_badge">new</span> <span
                                                     class="discount_price">-5%</span>
                                                 <div class="product_img">
-                                                    <a
-                                                            th:href="@{/web/product-detail?productID={productID}(productID=${product.productID})}">
+                                                    <a th:href="@{/product-detail?productID={productID}(productID=${product.productID})}">
                                                         <img th:src="@{'/getimage/' + ${product.image}}" />
                                                     </a>
                                                 </div>
@@ -262,7 +261,7 @@
                                                         <div class="product_title">
                                                             <h4>
                                                                 <a
-                                                                        th:href="@{/web/product-detail?productID={productID}(productID=${product.productID})}"
+                                                                        th:href="@{/product-detail?productID={productID}(productID=${product.productID})}"
                                                                         th:text="${product.productName}"></a>
                                                             </h4>
                                                         </div>
@@ -278,7 +277,7 @@
                                                                    title="Quick View"><i class="ion-android-open"></i></a></li>
 
                                                             <li><a
-                                                                    th:href="@{/web/product-detail?productID={productID}(productID=${product.productID})}"><i
+                                                                    th:href="@{/product-detail?productID={productID}(productID=${product.productID})}"><i
                                                                     class="ion-clipboard"></i></a></li>
                                                         </ul>
                                                     </div>
@@ -338,7 +337,7 @@
                                                                    title="Quick View"><i class="ion-android-open"></i></a></li>
 
                                                             <li><a
-                                                                    th:href="@{/web/product-detail?productID={productID}(productID=${product.productID})}"><i
+                                                                    th:href="@{/product-detail?productID={productID}(productID=${product.productID})}"><i
                                                                     class="ion-clipboard"></i></a></li>
                                                         </ul>
                                                     </div>

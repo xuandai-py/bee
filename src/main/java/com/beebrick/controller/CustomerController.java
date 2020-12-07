@@ -49,7 +49,7 @@ public class CustomerController {
         if (bindingResult.hasErrors()) {
             return "admin/customer/add";
         } else {
-            if (customerService.findBycustomername(customer.getUsername()) != null) {
+            if (customerService.findByUsername(customer.getUsername()) != null) {
                 customer.setUsername(null);
                 model.addAttribute("message", "Username is already exists!");
                 return "admin/customer/add";
@@ -70,7 +70,7 @@ public class CustomerController {
 
     @RequestMapping(value = "admin/customer/edit", method = RequestMethod.GET)
     public String edit(@RequestParam("username") String username, Model model) {
-        Optional<Customer> edit = customerService.findByUsername(username);
+        Optional<Customer> edit = customerService.findByUserName(username);
         edit.ifPresent(customer -> model.addAttribute("customer", customer));
         return "admin/customer/edit";
     }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html class="no-js" lang="zxx" xmlns:th="http://www.w3.org/1999/xhtml">
+<html class="no-js" lang="zxx" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="web/common/header :: web-common-header" />
 <!--<div id="fb-root"></div>-->
 </head>
@@ -25,14 +26,14 @@
                             <li th:classappend="${classActiveBilling}? 'active'"><a href="#downloads" data-toggle="tab" class="nav-link">Billings</a></li>
                             <li th:classappend="${classActiveShipping}? 'active'"><a href="#address" data-toggle="tab" class="nav-link">Shipping</a></li>
                             <li th:classappend="${classActiveEdit}? 'active'"><a href="#account-details" data-toggle="tab" class="nav-link">Account details</a></li>
-                            <li><a href="login.html" class="nav-link">logout</a></li>
+                            <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Log out</a></li>
                         </ul>
                     </div>
                     <div class="col-sm-12 col-md-9 col-lg-9">
                         <!-- Tab panes -->
                         <div class="tab-content dashboard-content">
                             <div class="tab-pane fade show active" id="dashboard">
-                                <h3>Hello: <span th:text="${#strings.toUppserCase{customer.username}}"></span></h3>
+                                <h3>Hello: <span th:text="${#strings.toUpperCase{customer.username}}"></span></h3>
                                 <p>From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a href="#">Edit your password and account details.</a></p>
                             </div>
                             <div class="tab-pane fade" id="orders">

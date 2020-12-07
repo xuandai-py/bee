@@ -14,7 +14,7 @@
 <div class="organic_food_wrapper">
     <div th:replace="web/common/header :: header"/>
     <!--breadcrumb area start-->
-    <div class="breadcrumb_container">
+    <!--<div class="breadcrumb_container">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -27,44 +27,58 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
     <!--breadcrumb area end-->
     <div class="cart_main_area">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <form action="#">
+                    <form th:action="@{/shoppingCart/updateCartItem}" method="post">
                         <div class="table-content table-responsive">
                             <table>
                                 <thead>
                                 <tr>
-                                    <th class="img-thumbnail"></th>
+                                    <th class="img-thumbnail">Product</th>
                                     <th class="product-name"></th>
                                     <th class="product-price"></th>
                                     <th class="product-quantity"></th>
                                     <th class="product-subtotal">Total</th>
-                                    <th class="product-remove"></th>
+                                    <th class="product-remove">Action</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="product-thumbnail"><img src="/assets/img/product/1_.jpg" alt=""></td>
-                                    <td class="product-name"><a href="#">Chameleonc Wazzupbaby</a></td>
-                                    <td class="product-price"><span class="amount">290.000₫</span></td>
-                                    <td class="product-quantity">
-                                        <div class="quickview_plus_minus quick_cart">
-                                            <div class="quickview_plus_minus_inner">
-                                                <div class="cart-plus-minus cart_page">
-                                                    <input type="text" value="1" name="qtybutton" class="cart-plus-minus-box">
+                                    <tbody th:each="cartItem : ${cartItemList}">
+                                        <tr>
+                                            <td class="product-thumbnail" rowspan="5">
+                                                <a >
+                                                    <img th:src="@{'/getimage/' + ${cartItem.product.image}}" />
+                                                </a>
+                                            </td>
+
+                                            <td class="product-name"><a th:text="${cartItem.product.productName}"></a></td>
+
+                                            <td class="product-price" rowspan="5"><span class="amount" th:text="${cartItem.product.price}"></span></td>
+
+                                            <td class="product-quantity" rowspan="5">
+                                                <div class="quickview_plus_minus quick_cart">
+                                                    <div class="quickview_plus_minus_inner">
+                                                        <div class="cart-plus-minus cart_page">
+                                                            <input type="text" value="1" name="qtybutton" class="cart-plus-minus-box">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="product-subtotal">290.000₫</td>
-                                    <td class="product-remove"><a href="#">Remove</a></td>
-                                </tr>
-                                </tbody>
-                                <tbody>
+                                            </td>
+                                            <td class="product-subtotal" rowspan="5">290.000₫</td>
+                                            <td class="product-remove" rowspan="5"><a th:href="@{/shoppingCart/removeItem?id=}+${cartItem.id}">Remove</a></td>
+                                        </tr>
+                                        <tr>
+                                            <p th:if="${cartItem.product.inStockNumber&gt;10}" style="color: green;">In Stock</p>
+                                            <p th:if="${cartItem.product.inStockNumber&lt;10 and cartItem.product.inStockNumber&gt;0}" style="color: green;">
+                                                Only <span th:text="${cartItem.product.inStockNumber}"></span>In Stock
+                                            </p>
+                                            <p th:if="${cartItem.product.inStockNumber==0}" style="color: yellow;">Product is not available</p>
+                                        </tr>
+                                    </tbody>
+                                <!--<tbody>
                                 <tr>
                                     <td class="product-thumbnail"><img src="/assets/img/product/2_.jpg" alt=""></td>
                                     <td class="product-name"><a href="#">Chameleonc Wazzupbaby</a></td>
@@ -81,13 +95,21 @@
                                     <td class="product-subtotal">290.000₫</td>
                                     <td class="product-remove"><a href="#">Remove</a></td>
                                 </tr>
-                                </tbody>
+                                </tbody>-->
                             </table>
                         </div>
+                        <!--message -->
+                        <div class="alert alert-warning" th:if="${notEnoughStock}">
+                            Sorry, we don't have enough item for your cart. Please update product quantity!!!
+                        </div>
+                        <div class="alert alert-warning" th:if="${emptyCart}">
+                            Your cart still empty. Please add any item you want to cart!!!
+                        </div>
+
                         <div class="row table-responsive_bottom">
                             <div class="col-lg-7 col-sm-7 col-md-7">
                                 <div class="buttons-carts">
-                                    <a href="#">Continue Shopping</a>
+                                    <a th:href="@{/shop}">Continue Shopping</a>
                                 </div>
                             </div>
                             <div class="col-lg-5 col-sm-5 col-md-5">
@@ -111,7 +133,7 @@
                                     </div>
 
                                     <div class="wc-proceed-to-checkout">
-                                        <a href="check-out.html">Proceed to Checkout</a>
+                                        <a th:href="@{checkout(id=${shoppingCart.id})}">Proceed to Checkout</a>
                                     </div>
                                 </div>
                             </div>

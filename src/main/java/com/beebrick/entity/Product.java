@@ -16,6 +16,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -45,7 +46,7 @@ public class Product {
 
 	@NotNull(message = "Please enter quantity in stock")
 	@Column(name = "QuantityInStock")
-	private Integer quantityInStock;
+	private int quantityInStock;
 
 	@Column(name = "Description")
 	private String description;
@@ -80,6 +81,10 @@ public class Product {
 
 	@OneToMany(mappedBy = "ProductID")
 	private List<OrderDetail> orderDetail;
+
+	@OneToMany(mappedBy = "product")
+	@JsonIgnore
+	private List<ProductToCartItem> productToCartItemList;
 
 	public Integer getProductID() {
 		return productID;
@@ -121,11 +126,11 @@ public class Product {
 		this.price = price;
 	}
 
-	public Integer getQuantityInStock() {
+	public int getQuantityInStock() {
 		return quantityInStock;
 	}
 
-	public void setQuantityInStock(Integer quantityInStock) {
+	public void setQuantityInStock(int quantityInStock) {
 		this.quantityInStock = quantityInStock;
 	}
 

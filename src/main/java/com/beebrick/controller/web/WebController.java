@@ -2,15 +2,18 @@ package com.beebrick.controller.web;
 
 
 import com.beebrick.entity.Authority.PasswordResetToken;
+import com.beebrick.entity.Authority.Role;
+import com.beebrick.entity.Authority.UserRole;
 import com.beebrick.entity.Category;
 import com.beebrick.entity.Customer;
 import com.beebrick.entity.Product;
+import com.beebrick.repository.CustomerRepository;
 import com.beebrick.service.CategoryService;
 import com.beebrick.service.CustomerService;
 import com.beebrick.service.ProductService;
 import com.beebrick.service.impl.CustomerSecurityService;
 import com.beebrick.util.MailConstructor;
-import com.beebrick.util.SecuriryUtil;
+import com.beebrick.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 
@@ -19,15 +22,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.UUID;
+import javax.websocket.server.PathParam;
+import java.security.Principal;
+import java.util.*;
 
 @Controller
 @RequestMapping("/")
@@ -51,6 +54,8 @@ public class WebController {
     @Autowired
     private CustomerSecurityService customerSecurityService;
 
+    @Autowired
+    private CustomerRepository customerRepository;
 
 
     @GetMapping(value = {"/", "/index"}) // tra ve trang index cho nguoi dung.
@@ -91,7 +96,7 @@ public class WebController {
         return "web/shop";
     }
 
-    @GetMapping("/productdetail")
+    /*@GetMapping("/product-detail")
     public String productdetail(@RequestParam("productID") Integer productID, Model model){
         List<Product> list = productService.getAll();
         model.addAttribute("products", list);
@@ -102,52 +107,112 @@ public class WebController {
 
         Optional<Product> edit = productService.findById(productID);
         edit.ifPresent(product -> model.addAttribute("product", product));
+
+        List<Integer> qtyList = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+
+        model.addAttribute("qtyList", qtyList);
+        model.addAttribute("qty", 1);
+
+        return "web/product-detail";
+    }
+*/
+    @RequestMapping("/product-detail")
+    public String productDetail(
+            @PathParam("id") Integer productID, Model model, Principal principal) {
+        if(principal != null) {
+            String username = principal.getName();
+            Customer customer = customerService.findByUsername(username);
+            model.addAttribute("customer", customer);
+        }
+
+        Optional<Product> edit = productService.findById(productID);
+        edit.ifPresent(product -> model.addAttribute("product", product));
+
+        List<Integer> qtyList = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+
+        model.addAttribute("qtyList", qtyList);
+        model.addAttribute("qty", 1);
+
         return "web/product-detail";
     }
 
-
-    @RequestMapping("/web-login")
+    @RequestMapping("/login")
     public String login(Model model){
         model.addAttribute("classActiveLogin", true); // enable popup tabs
         return "web/login-web";
     }
 
+
     @RequestMapping("/web-forgetPassword")
-    public String forgetPassword(Model model){
+    public String forgetPassword(HttpServletRequest request,
+                                 @ModelAttribute("recoverEmail") String customerEmail,
+                                  Model model){
 
         model.addAttribute("classActiveForgetPassword", true); // enable popup tabs
-        return "web/my-account";
+        Customer customer = customerService.findByEmail(customerEmail);
+
+        if(customer == null){
+            model.addAttribute("emailNotExist", true);
+            return "web/login-web";
+        }
+
+        String password = SecurityUtil.randomPassword();
+
+        String encryptedPassword = SecurityUtil.passwordEncoderBCry().encode(password);
+        customer.setPassword(encryptedPassword);
+
+        customerService.save(customer);
+
+        String token = UUID.randomUUID().toString();
+        customerService.createPasswordResetTokenForUser(customer, token);
+
+        String appUrl = "http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
+
+        SimpleMailMessage newEmail = mailConstructor.constructResetTokenEmail(appUrl, request.getLocale(), token, customer, password);
+
+        javaMailSender.send(newEmail);
+
+        model.addAttribute("forgetPasswordEmailSent", "true");
+
+        return "web/login-web";
+
     }
 
     @PostMapping(value = "/web-newUser")
     public String newCustomerPost(HttpServletRequest request,
                                   @ModelAttribute("email") String customerEmail,
                                   @ModelAttribute("username") String username,
-                                  Model model){
+                                  Model model) throws Exception {
         model.addAttribute("classActiveNewAccount", true);
         model.addAttribute("email", customerEmail);
         model.addAttribute("username", username);
 
-        if(customerService.findBycustomername(username) != null){
+        if(customerService.findByUsername(username) != null){
             model.addAttribute("usernameExists", true);
-            return "web/view";
+            return "web/login-web";
         }
 
         if(customerService.findByEmail(customerEmail) != null){
             model.addAttribute("emailExists", true);
-            return "web/view";
+            return "web/login-web";
         }
 
         Customer customer = new Customer();
         customer.setUsername(username);
         customer.setEmail(customerEmail);
 
-        String password = SecuriryUtil.randomPassword();
+        String password = SecurityUtil.randomPassword();
 
-        String encryptedPassword = SecuriryUtil.passwordEncoderBCry().encode(password);
+        String encryptedPassword = SecurityUtil.passwordEncoderBCry().encode(password);
         customer.setPassword(encryptedPassword);
 
-        customerService.save(customer);
+        Role role = new Role();
+        role.setRoleId(1);
+        role.setName("ROLE_USER");
+        Set<UserRole> userRoles = new HashSet<>();
+        userRoles.add(new UserRole(customer, role));
+        customerService.createCustomer(customer, userRoles);
+
 
         String token = UUID.randomUUID().toString();
         customerService.createPasswordResetTokenForUser(customer, token);
@@ -161,7 +226,7 @@ public class WebController {
         model.addAttribute("emailSent", "true");
         //model.addAttribute("orderList", customer.getOrderList());
 
-        return "web/my-account";
+        return "web/login-web";
 
     }
 
@@ -172,7 +237,7 @@ public class WebController {
         if(passwordResetToken == null){
             String message = "Invalid token";
             model.addAttribute("message", message);
-            return "redirect:/badRequest";
+            return "/error";
         }
 
         Customer customer = passwordResetToken.getCustomer();
@@ -189,91 +254,79 @@ public class WebController {
 
         model.addAttribute("classActiveEdit", true);
 
-        model.addAttribute("classActiveNewUser", true); // enable popup tabs
+        //model.addAttribute("classActiveNewUser", true); // enable popup tabs
         return "web/my-account";
     }
 
-    /*@RequestMapping(value="/newUser", method = RequestMethod.POST)
-    public String newUserPost(
-            HttpServletRequest request,
-            @ModelAttribute("email") String userEmail,
-            @ModelAttribute("username") String username,
+    @RequestMapping(value="/updateUserInfo", method=RequestMethod.POST)
+    public String updateUserInfo(
+            @ModelAttribute("customer") Customer customer,
+            @ModelAttribute("newPassword") String newPassword,
             Model model
-    ) throws Exception{
-        model.addAttribute("classActiveNewAccount", true);
-        model.addAttribute("email", userEmail);
-        model.addAttribute("username", username);
+    ) throws Exception {
+        Customer currentCustomer = customerService.findByUsername(customer.getUsername());
 
-        if (userService.findByUsername(username) != null) {
-            model.addAttribute("usernameExists", true);
-
-            return "myAccount";
+        if(currentCustomer == null) {
+            throw new Exception ("User not found");
+            // log
         }
 
-        if (userService.findByEmail(userEmail) != null) {
-            model.addAttribute("emailExists", true);
-
-            return "myAccount";
+        /*check email already exists*/
+        if (customerService.findByEmail(customer.getEmail())!=null) {
+            if(customerService.findByEmail(customer.getEmail()).getUsername() != currentCustomer.getUsername()) {
+                model.addAttribute("emailExists", true);
+                return "web/my-account";
+            }
         }
 
-        User user = new User();
-        user.setUsername(username);
-        user.setEmail(userEmail);
-
-        String password = SecurityUtility.randomPassword();
-
-        String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);
-        user.setPassword(encryptedPassword);
-
-        Role role = new Role();
-        role.setRoleId(1);
-        role.setName("ROLE_USER");
-        Set<UserRole> userRoles = new HashSet<>();
-        userRoles.add(new UserRole(user, role));
-        userService.createUser(user, userRoles);
-
-        String token = UUID.randomUUID().toString();
-        userService.createPasswordResetTokenForUser(user, token);
-
-        String appUrl = "http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
-
-        SimpleMailMessage email = mailConstructor.constructResetTokenEmail(appUrl, request.getLocale(), token, user, password);
-
-        mailSender.send(email);
-
-        model.addAttribute("emailSent", "true");
-        model.addAttribute("orderList", user.getOrderList());
-
-        return "myAccount";
-    }
-
-
-    @RequestMapping("/newUser")
-    public String newUser(Locale locale, @RequestParam("token") String token, Model model) {
-        PasswordResetToken passToken = userService.getPasswordResetToken(token);
-
-        if (passToken == null) {
-            String message = "Invalid Token.";
-            model.addAttribute("message", message);
-            return "redirect:/badRequest";
+        /*check username already exists*/
+        if (customerService.findByUsername(customer.getUsername())!=null) {
+            if(customerRepository.findByUsername(customer.getUsername()).getUsername() != currentCustomer.getUsername()) {
+                model.addAttribute("usernameExists", true);
+                return "web/my-account";
+            }
         }
 
-        User user = passToken.getUser();
-        String username = user.getUsername();
+//		update password
+        if (newPassword != null && !newPassword.isEmpty() && !newPassword.equals("")){
+            BCryptPasswordEncoder passwordEncoder = SecurityUtil.passwordEncoderBCry();
+            String dbPassword = currentCustomer.getPassword();
+            if(passwordEncoder.matches(customer.getPassword(), dbPassword)){
+                currentCustomer.setPassword(passwordEncoder.encode(newPassword));
+            } else {
+                model.addAttribute("incorrectPassword", true);
 
-        UserDetails userDetails = userSecurityService.loadUserByUsername(username);
+                return "web/my-account";
+            }
+        }
+
+        currentCustomer.setFullname(customer.getFullname());
+        currentCustomer.setAddress(customer.getAddress());
+        currentCustomer.setEmail(customer.getEmail());
+        currentCustomer.setUsername(customer.getUsername());
+        currentCustomer.setPhoneNumber(customer.getPhoneNumber());
+
+        customerService.save(currentCustomer);
+
+        model.addAttribute("updateSuccess", true);
+        model.addAttribute("customer", currentCustomer);
+        model.addAttribute("classActiveEdit", true);
+
+        model.addAttribute("listOfShippingAddresses", true);
+        model.addAttribute("listOfCreditCards", true);
+
+        UserDetails userDetails = customerSecurityService.loadUserByUsername(customer.getUsername());
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(),
                 userDetails.getAuthorities());
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        //model.addAttribute("orderList", customer.getOrderList());
 
-        model.addAttribute("user", user);
+        return "web/my-account";
+    }
 
-        model.addAttribute("classActiveEdit", true);
 
-        return "myProfile";
-    }*/
 
     @RequestMapping("/my-account")
     public String myAcc(){

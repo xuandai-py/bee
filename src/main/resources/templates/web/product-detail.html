@@ -4,6 +4,7 @@
 <!--<div id="fb-root"></div>-->
 </head>
 <body>
+<div class="content">
 <!-- Add your site or application content here -->
 <!-- Load Facebook SDK for JavaScript -->
 <div th:replace="web/common/header :: load-popup" />
@@ -14,128 +15,119 @@
 <!--Slider start-->
 <!-- primary block area -->
 <div class="table_primary_block pt-100">
+    <h2 class="section-headline">
+        <h2 class="section-headline">
+            <span th:text="${customer}? ${#strings.toUpperCase(customer.username)} : 'All Books'"></span>
+        </h2>
+    </h2>
     <div class="container">
-        <div class="row">
-            <div class="col-lg-5 col-md-5 col-sm-12">
-                <div class="product-flags">
-                    <div class="tab-content" th:object="${product}" >
-                        <div class="tab-pane fade show active" id="tabone" role="tabpanel">
-                            <div class="product_tab_img">
-                                <a href="#"><img th:src="@{'/getimage/' + ${product.image}}" alt=""></a>
+        <form th:action="@{/shoppingCart/addItem}" method="post">
+            <input hidden="hidden" th:field="*{product.productID}">
+
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-12">
+                    <div class="product-flags">
+                        <div class="tab-content" th:object="${product}" >
+                            <div class="tab-pane fade show active" id="tabone" role="tabpanel">
+                                <div class="product_tab_img">
+                                    <a href="#"><img th:src="@{'/getimage/' + ${product.image}}" alt="" ></a>
+                                </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="tabtwo" role="tabpanel">
-                            <div class="product_tab_img">
-                                <a href="#"><img src="assets/img/cart/duckoo-tropical-island-blind-box-series-by-chokocider-x-pop-mart-the-toy-chronicle-2020-q.jpg" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="tabthree" role="tabpanel">
-                            <div class="product_tab_img">
-                                <a href="#"><img src="assets/img/cart/duckoo-tropical-island-blind-box-series-by-chokocider-x-pop-mart-the-toy-chronicle-2020-r2r2-1.jpg" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-                    <div class="products_tab_button">
-                        <ul class="nav product_navactive" role="tablist">
-                            <li class="product_button_one">
-                                <a class="nav-link active" data-toggle="tab" href="#tabone" role="tab" aria-controls="imgeone" aria-selected="false"><img src="assets/img/cart/duckoo-tropical-island-blind-box-series-by-chokocider-x-pop-mart-the-toy-chronicle-2020-burnt.jpg" alt="" width="100px"></a>
-                            </li>
-                            <li>
-                                <a class="nav-link" data-toggle="tab" href="#tabtwo" role="tab" aria-controls="imgetwo" aria-selected="false"><img src="assets/img/cart/duckoo-tropical-island-blind-box-series-by-chokocider-x-pop-mart-the-toy-chronicle-2020-q.jpg" alt="" width="100px"></a>
-                            </li>
-                            <li>
-                                <a class="nav-link" data-toggle="tab" href="#tabthree" role="tab" aria-controls="imgethree" aria-selected="false"><img src="assets/img/cart/duckoo-tropical-island-blind-box-series-by-chokocider-x-pop-mart-the-toy-chronicle-2020-rq.jpg" alt="" width="100px"></a>
-                            </li>
-                        </ul>
+
+                       <!-- <div class="products_tab_button">
+                            <ul class="nav product_navactive" role="tablist">
+                                <li class="product_button_one">
+                                    <a class="nav-link active" data-toggle="tab" href="#tabone" role="tab" aria-controls="imgeone" aria-selected="false"><img src="assets/img/cart/duckoo-tropical-island-blind-box-series-by-chokocider-x-pop-mart-the-toy-chronicle-2020-burnt.jpg" alt="" width="100px"></a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" data-toggle="tab" href="#tabtwo" role="tab" aria-controls="imgetwo" aria-selected="false"><img src="assets/img/cart/duckoo-tropical-island-blind-box-series-by-chokocider-x-pop-mart-the-toy-chronicle-2020-q.jpg" alt="" width="100px"></a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" data-toggle="tab" href="#tabthree" role="tab" aria-controls="imgethree" aria-selected="false"><img src="assets/img/cart/duckoo-tropical-island-blind-box-series-by-chokocider-x-pop-mart-the-toy-chronicle-2020-rq.jpg" alt="" width="100px"></a>
+                                </li>
+                            </ul>
+                        </div>-->
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-7 col-md-7 col-sm-12" >
+                <div class="col-lg-7 col-md-7 col-sm-12" >
 
-                <div class="product__details_content" th:object="${product}">
-                    <input type="hidden" th:field="*{productID}"/>
-                    <div class="demo_product">
-                        <h2 th:text="*{productName}"></h2>
-                        <p>SKU: PVN1569</p>
-                    </div>
-                    <div class="product_comments_block">
-                        <div class="comments_note clearfix">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
+                    <div class="product__details_content" th:object="${product}">
+                        <input type="hidden" th:field="*{productID}"/>
+                        <div class="demo_product">
+                            <h2 th:text="*{productName}"></h2>
                         </div>
-                        <div class="comments_advices">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i>
-                                    Read reviews (<span>1</span>)</a></li>
-                                <li><a href="#"><i class="fa fa-pencil"></i>Read reviews </a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="current_price">
-                        <span th:text="*{price}"></span>
-                    </div>
-                    <div class="product_information">
-                        <div id="product_description_short">
-                            &nbsp
-                        </div>
-                        <div class="product_variants">
-                            <div class="product_variant_list">
-                                <div class="product_variants_item variants_product">
-                                    <span class="control_label">Size</span>
-                                    <select id="group_1" name="group[1]">
-                                        <option value="1"selected="selected">Blindbox</option>
-                                        <option value="2">Set 12 Blindbox</option>
-                                    </select>
-                                </div>
-                                <div class="product_variants_item">
-                                </div>
+                        <div class="product_comments_block">
+                            <div class="comments_note clearfix">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
                             </div>
-                            <div class="quickview_plus_minus">
-                                <span class="control_label">Quantity</span>
-                                <div class="quickview_plus_minus_inner">
-                                    <div class="cart-plus-minus">
-                                        <input type="text" value="1" name="qtybutton" class="cart-plus-minus-box">
+                            <div class="comments_advices">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i>
+                                        Read reviews (<span>1</span>)</a></li>
+                                    <li><a href="#"><i class="fa fa-pencil"></i>Read reviews </a></li>
+                                    <li><h5><span th:if="${addSuccess}" style="color: forestgreen"><i class="fa fa-check" aria-hidden="true" style="color: forestgreen"></i>Added to cart.</span></h5></li>
+                                    <li><h5><span th:if="${notEnoughStock}" style="color: red">Oops, only <span th:text="${product.quantityInStock}"></span> In Stock.</span></h5></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="current_price">
+                            <span th:text="*{price}"></span>
+                        </div>
+                        <div class="product_information">
+                            <div id="product_description_short">
+                                &nbsp
+                            </div>
+                            <div class="product_variants">
+                                <div class="quickview_plus_minus">
+                                    <span class="control_label">Quantity</span>
+                                    <div class="quickview_plus_minus_inner">
+                                        <div class="cart-plus-minus">
+                                            <input  type="text" th:value="${product.quantityInStock}" name="qtybutton" class="cart-plus-minus-box">
+
+
+                                            <select name="qty">
+                                                <option th:each="qty : ${qtyList}" th:value="${qty}" th:text="${qty}">
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <h4 th:if="${product.quantityInStock&gt;10}" style="color: green">In Stock</h4>
+                                            <h4 th:if="${product.quantityInStock&lt;10 and product.quantityInStock&gt;0}" style="color: green">Only <span th:text="${product.quantityInStock}"> </span> In Stock</h4>
+                                            <h4 th:if="${product.quantityInStock==0}" style="color:darkred;">Unavailable</h4>
+                                        </div>
+                                    </div>
+                                    <div class="add_button">
+                                        <button type="submit"> Add to cart</button>
                                     </div>
                                 </div>
-                                <div class="add_button">
-                                    <button type="submit"> Add to cart</button>
+                                <div class="block-reassurance">
+                                    <ul>
+                                        <li>
+                                            <img src="assets/img/cart/cart1.png" alt="">
+                                            <span>Security policy (edit with Customer reassurance module)</span>
+                                        </li>
+                                        <li>
+                                            <img src="assets/img/cart/cart2.png" alt="">
+                                            <span>Delivery policy (edit with Customer reassurance module)</span>
+                                        </li>
+                                        <li>
+                                            <img src="assets/img/cart/cart3.png" alt="">
+                                            <span>Return policy (edit with Customer reassurance module)</span>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </div>
-                            <div class="social-sharing">
-                                <span>Share</span>
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="block-reassurance">
-                                <ul>
-                                    <li>
-                                        <img src="assets/img/cart/cart1.png" alt="">
-                                        <span>Security policy (edit with Customer reassurance module)</span>
-                                    </li>
-                                    <li>
-                                        <img src="assets/img/cart/cart2.png" alt="">
-                                        <span>Delivery policy (edit with Customer reassurance module)</span>
-                                    </li>
-                                    <li>
-                                        <img src="assets/img/cart/cart3.png" alt="">
-                                        <span>Return policy (edit with Customer reassurance module)</span>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 <!-- primary block end -->
@@ -159,83 +151,7 @@
                         </li>
                     </ul>
                 </div>
-                <!-- <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="Description" role="tabpanel">
-                        <div class="product-description">
-                            <p>ð�——ð�—¨ð�—–ð�—žð�—¢ð�—¢ ð�—§ð�—¥ð�—¢ð�—£ð�—œð�—–ð�—”ð�—Ÿ ð�—œð�—¦ð�—Ÿð�—”ð�—¡ð�——
-                                <br> by ð�—£ð�—¢ð�—£ð�— ð�—”ð�—¥ð�—§ x ð�——ð�—¨ð�—–ð�—žð�—¢ð�—¢
-                                <br> MÃ¹a hÃ¨ cÃ³ láº½ váº«n chÆ°a bá»‹ bá»� láº¡i phÃ­a sau khi Duckoo vÃ  Popmart rá»¥c rá»‹ch ra máº¯t má»™t series khÃ´ng thá»ƒ nÃ o chill hÆ¡n ná»¯a. NÃ o mÃ¬nh cÃ¹ng Ä‘áº¿n vá»›i Ä‘áº£o nhiá»‡t Ä‘á»›i cá»§a nhá»¯ng chÃº vá»‹t Ä‘Ã¡ng yÃªu vÃ  gá»£i Ä‘Ã²n Duckoo vá»›i vÃ´ sá»‘
-                                hoáº¡t Ä‘á»™ng thÃº vá»‹ : náº±m táº¯m náº¯ng bÃªn bá»� biá»ƒn, bÆ¡i cÃ¹ng cÃ¡i phao con vá»‹t, láº·n ngáº¯m san hÃ´, hay Ä‘Ã n ca bÃªn cÃ´ nÃ ng Ä‘ang nháº£y Ä‘iá»‡u Hula ... ChÃº vá»‹t nÃ o sáº½ Ä‘á»“ng hÃ nh vá»›i báº¡n á»Ÿ mua hÃ¨ báº¥t táº­n nÃ y?</p>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="details" role="tabpanel">
-                        <div class="product-details">
-                            <div class="product-manufacturer">
 
-                            </div>
-                            <div class="product-reference">
-                                <label class="label">SKU:</label>
-                                <span> PVN1569</span>
-                            </div>
-                            <div class="product-quantities">
-                                <label class="label">In stock</label>
-                                <span>321 Items</span>
-                            </div>
-                            <div class="product-out-of-stock">
-                                <section class="product-features">
-                                    <h3>Chi Tiáº¿t Sáº£n Pháº©m</h3>
-                                    <dl class="data-sheet">
-                                        <dt class="name">TÃªn sáº£n pháº©m</dt>
-                                        <dd class="value">DUCKOO TROPICAL ISLAND</dd>
-                                        <dt class="name">KÃ­ch thÆ°á»›c</dt>
-                                        <dd class="value">7-8cm</dd>
-                                        <dt class="name">Cháº¥t liá»‡u</dt>
-                                        <dd class="value">Vinyl</dd>
-                                        <dt class="name">HÃ¬nh thá»©c</dt>
-                                        <dd class="value">Blind Box - 1 há»™p sáº½ má»Ÿ ra 1 nhÃ¢n váº­t ngáº«u nhiÃªn.</dd>
-                                        <dt class="name">Sá»‘ lÆ°á»£ng</dt>
-                                        <dd class="value">12 máº«u cÆ¡ báº£n, 1 máº«u secret</dd>
-                                        <dt class="name">Thiáº¿t káº¿</dt>
-                                        <dd class="value">DUCKOO</dd>
-                                        <dt class="name">Sáº£n xuáº¥t</dt>
-                                        <dd class="value">POPMART</dd>
-                                    </dl>
-                                </section>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="Reviews" role="tabpanel">
-                        <div class="product_comments_block_tab">
-                            <div class="comment_clearfix">
-                                <div class="comment_author">
-                                    <span>Grade </span>
-                                    <div class="star_content clearfix">
-                                        <ul>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                                <div class="comment_author_infos">
-                                    <strong>posthemes </strong>
-                                    <br>
-                                    <em>20/10/2020</em>
-                                </div>
-                                <div class="comment_details">
-                                    <h4>Demo</h4>
-                                    <p>themes</p>
-                                </div>
-                                <div class="review">
-                                    <p><a href="#">Write your review !</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
@@ -366,5 +282,15 @@
 <!-- footer end -->
 <!-- all js here -->
 <div th:replace="web/common/header :: body-bottom-scripts" />
+</div>
+
+<div class="loader-wrapper">
+    <span class="loader"><span class="loader-inner"></span></span>
+</div>
+<script>
+    $(window).on("load",function(){
+        $(".loader-wrapper").fadeOut("slow");
+    });
+</script>
 </body>
 </html>

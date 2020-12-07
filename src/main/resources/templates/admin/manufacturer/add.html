@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Add User</title>
 	<link type="text/css" rel="stylesheet" href="../../bootstrap.min.css"  />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<style>
 		.error{
 			color: red;
@@ -20,30 +21,33 @@
 				<div class="card-body">
 					<div>
 			            <label th:text="ManufacturerName" th:for="manufacturerName"></label>
-			            <input type="text" th:field="*{manufacturerName}" class="form-control"/>
+			            <input type="text" th:field="*{manufacturerName}" class="form-control" id="ManufacturerName"/>
+			            <span th:if="${#fields.hasErrors('manufacturerName')}" th:errors="*{manufacturerName}" id="manufacturerName" class="error"></span>
+			            <span th:text=${message} id="manufacturerName" class="error"></span>
 			        </div>
 			        <div style="clear: both; display: block; height: 10px"></div>
 			        <div>
 			            <label th:text="ManufacturerAddress" th:for="manufacturerAddress"></label>
-			            <input type="text" th:field="*{manufacturerAddress}" class="form-control"/>
+			            <input type="text" th:field="*{manufacturerAddress}" class="form-control" id="ManufacturerAddress"/>
+			            <span th:if="${#fields.hasErrors('manufacturerAddress')}" th:errors="*{manufacturerAddress}" id="manufacturerAddress" class="error"></span>
 			        </div>
 			        <div style="clear: both; display: block; height: 10px"></div>
 			        <div>
 			            <label th:text="ManufacturerEmail" th:for="manufacturerEmail"></label>
-			            <input type="text" th:field="*{manufacturerEmail}" class="form-control"/>
+			            <input type="text" th:field="*{manufacturerEmail}" class="form-control" id="ManufacturerEmail"/>
+			            <span th:if="${#fields.hasErrors('manufacturerEmail')}" th:errors="*{manufacturerEmail}" id="manufacturerEmail" class="error"></span>    
 			        </div>
 			        <div style="clear: both; display: block; height: 10px"></div>
 			        <div>
 			            <label th:text="ManufacturerPhone" th:for="manufacturerPhone"></label>
-			            <input type="text" th:field="*{manufacturerPhone}" class="form-control"/>
+			            <input type="text" th:field="*{manufacturerPhone}" class="form-control" id="ManufacturerPhone"/>
+			            <span th:if="${#fields.hasErrors('manufacturerPhone')}" th:errors="*{manufacturerPhone}" id="manufacturerPhone" class="error"></span>          
 			        </div>
 			        <div style="clear: both; display: block; height: 10px"></div>
 			        <div>
 			            <label th:text="Description" th:for="description"></label>
-			            <textarea th:field="*{description}" style="width: 620px; height: 175px" ></textarea>
+			            <textarea th:field="*{description}" rows="10" class="form-control"></textarea>
 			        </div>
-			        
-
 				</div>
 				<div class="card-footer">
 					<input type="submit" class="btn btn-success" value="Save" />
@@ -51,5 +55,34 @@
 			</form>
 		</div>
 	</div>
+	<script>
+		$("#ManufacturerName").on('input', function(){
+			var manufacturerName = document.getElementById("ManufacturerName").value;
+			if(manufacturerName != ""){
+				document.getElementById("manufacturerName").innerHTML = "";
+			}
+		});
+		
+		$("#ManufacturerAddress").on('input', function(){
+			var manufacturerAddress = document.getElementById("ManufacturerAddress").value;
+			if(manufacturerAddress != ""){
+				document.getElementById("manufacturerAddress").innerHTML = "";
+			}
+		});
+		
+		$("#ManufacturerEmail").on('input', function(){
+			var manufacturerEmail = document.getElementById("ManufacturerEmail").value;
+			if(manufacturerEmail != ""){
+				document.getElementById("manufacturerEmail").innerHTML = "";
+			}
+		});
+		
+		$("#ManufacturerPhone").on('input', function(){
+			var manufacturerPhone = document.getElementById("ManufacturerPhone").value;
+			if(manufacturerPhone != ""){
+				document.getElementById("manufacturerPhone").innerHTML = "";
+			}
+		});
+	</script>
 </body>
 </html>

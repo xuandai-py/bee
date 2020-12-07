@@ -26,4 +26,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
 	@Query(value = "SELECT * FROM products WHERE CategoryID = 1 ORDER BY RAND() LIMIT 4", nativeQuery = true)
 	public List<Product> getAllRamdom();
+
+	@Query(value = "SELECT * from products where ProductID=?1", nativeQuery = true)
+	public Product findByProductID(Integer productID);
 }

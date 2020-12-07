@@ -22,12 +22,16 @@
 				<div class="card-body">
 					<div>
 			            <label th:text="Title" th:for="title"></label>
-			            <input type="text" th:field="*{title}" class="form-control"/>
+			            <input type="text" th:field="*{title}" class="form-control" id="Title"/>
+			            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" id="title" class="error"></span>
+						<span id="title" class="error"></span>
 			        </div>
 			        <div style="clear: both; display: block; height: 10px"></div>
 			        <div>
 			            <label th:text="Content" th:for="content"></label>
-			            <textarea rows="" cols="" id="content" name="content" style="width: 820px; height: 175px" th:field="*{content}"></textarea>
+			            <textarea id="textarea" name="Content" style="width: 820px; height: 175px" th:field="*{content}" onchange="alert('You just changed the textarea.')"></textarea>
+			            <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}" id="content" class="error"></span>
+						<span id="content" class="error"></span>
 			        </div>
 				</div>
 				<div class="card-footer">
@@ -39,8 +43,23 @@
 	<script type="text/javascript">
 		var editor = '';
 		$(document).ready(function() {
-			editor = CKEDITOR.replace('content');
+			editor = CKEDITOR.replace('textarea');
 		});
+		
+		$("#Title").on('input', function(){
+			var title = document.getElementById("Title").value;
+			if(title != ""){
+				document.getElementById("title").innerHTML = "";
+			}
+		});
+		
+		$("#textarea").on('change', function(){
+			var content = document.getElementId("textarea").value;
+			if(content != ""){
+				document.getElementById("content").innerHTML = "";
+			}
+		});
+		
 	</script>
 </body>
 </html>

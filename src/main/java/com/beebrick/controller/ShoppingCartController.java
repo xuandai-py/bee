@@ -2,17 +2,22 @@ package com.beebrick.controller;
 
 import com.beebrick.entity.CartItem;
 import com.beebrick.entity.Customer;
+import com.beebrick.entity.Product;
 import com.beebrick.entity.ShoppingCart;
 import com.beebrick.service.CartItemService;
 import com.beebrick.service.CustomerService;
+import com.beebrick.service.ProductService;
 import com.beebrick.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/shoppingCart")
@@ -27,9 +32,12 @@ public class ShoppingCartController {
     @Autowired
     private ShoppingCartService shoppingCartService;
 
+    @Autowired
+    private ProductService productService;
+
     @RequestMapping("/cart")
     public String shoppingCart(Model model, Principal principal) {
-        Customer customer = customerService.findBycustomername(principal.getName());
+        Customer customer = customerService.findByUsername(principal.getName());
         ShoppingCart shoppingCart = customer.getShoppingCart();
 
         List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
@@ -42,27 +50,29 @@ public class ShoppingCartController {
         return "web/cart";
     }
 
-    /*@RequestMapping("/addItem")
+    @RequestMapping("/addItem")
     public String addItem(
-            @ModelAttribute("book") Book book,
+            @ModelAttribute("product") Product product,
             @ModelAttribute("qty") String qty,
-            Model model, Principal principal
-    ) {
-        User user = userService.findByUsername(principal.getName());
-        book = bookService.findOne(book.getId());
+            Model model, Principal principal) {
 
-        if (Integer.parseInt(qty) > book.getInStockNumber()) {
+        Customer customer = customerService.findByUsername(principal.getName());
+
+        product = productService.findByProductID(product.getProductID());
+
+
+        if (Integer.parseInt(qty) > product.getQuantityInStock()) {
             model.addAttribute("notEnoughStock", true);
-            return "forward:/bookDetail?id="+book.getId();
+            return "forward:/product-detail?id="+product.getProductID();
         }
 
-        CartItem cartItem = cartItemService.addBookToCartItem(book, user, Integer.parseInt(qty));
-        model.addAttribute("addBookSuccess", true);
+        CartItem cartItem = cartItemService.addProductToCartItem(product, customer, Integer.parseInt(qty));
+        model.addAttribute("addSuccess", true);
 
-        return "forward:/bookDetail?id="+book.getId();
+        return "forward:/product-detail?id="+product.getProductID();
     }
 
-    @RequestMapping("/updateCartItem")
+    /* @RequestMapping("/updateCartItem")
     public String updateShoppingCart(
             @ModelAttribute("id") Long cartItemId,
             @ModelAttribute("qty") int qty
@@ -72,12 +82,12 @@ public class ShoppingCartController {
         cartItemService.updateCartItem(cartItem);
 
         return "forward:/shoppingCart/cart";
-    }
+    }*/
 
     @RequestMapping("/removeItem")
-    public String removeItem(@RequestParam("id") Long id) {
+    public String removeItem(@RequestParam("id") Integer productID) {
         cartItemService.removeCartItem(cartItemService.findById(id));
 
         return "forward:/shoppingCart/cart";
-    }*/
+    }
 }

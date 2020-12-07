@@ -167,7 +167,7 @@
                     <div class="header_wrapper_inner">
 
                         <div class="logo col-xs-12">
-                            <a href="index.html"><img name="image" src="/images/logo-1.png" alt="BeeBrick_logo"
+                            <a th:href="@{/index}"><img name="image" src="/images/logo-1.png" alt="BeeBrick_logo"
                                                       id="image"/></a>
                         </div>
                         <div class="main_menu_inner">
@@ -264,7 +264,7 @@
                             <div class="mini__cart">
                                 <div class="mini_cart_inner">
                                     <div class="cart_icon">
-                                        <a href="#">
+                                        <a th:href="@{/shoppingCart/cart}">
                                                 <span class="cart_icon_inner">
                                                     <i class="ion-android-cart"></i>
                                                     <span class="cart_count">2</span>
@@ -360,11 +360,11 @@
                                         </div>
                                         <div class="user_info_top">
                                             <ul>
-                                                <li><a sec:authorize="isAnonymous()" th:href="@{/web-login}">my account</a></li>
+                                                <li><a sec:authorize="isAnonymous()" th:href="@{/login}">my account</a></li>
+                                                <li><a sec:authorize="isAnonymous()" th:href="@{/login}">Login</a></li>
                                                 <li><a sec:authorize="isAuthenticated()" th:href="@{/web-myProfile}">my account</a></li>
                                                 <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">Log out</a></li>
-                                                <li><a th:href="@{#login-box}">Log in</a></li>
-                                                <li><a href="#login-box">Log in</a></li>
+
                                             </ul>
                                         </div>
                                     </div>
@@ -441,7 +441,7 @@
                     <div class="single_footer widget">
                         <div class="single_footer_widget_inner">
                             <div class="footer_logo">
-                                <a href="#"><img src="/images/logo_footer.png" alt="" width="270px"/></a>
+                                <a th:href="@{/index}"><img src="/images/logo_footer.png" alt="" width="270px"/></a>
                             </div>
                             <div class="footer_content">
                                 <p>Address: 436 Ba Tháng Hai, phường 12, quận 10, thành phố Hồ Chí Minh </p>

@@ -40,6 +40,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	public Product findByProductID(Integer productID) {
+		return productRepository.findByProductID(productID);
+	}
+
+	@Override
 	public List<Product> getAllRandom() {
 		return productRepository.getAllRamdom();
 	}

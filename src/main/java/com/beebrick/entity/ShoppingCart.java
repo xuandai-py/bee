@@ -4,6 +4,7 @@ package com.beebrick.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -12,8 +13,8 @@ public class ShoppingCart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    private double GrandTotal;
+    private Integer id;
+    private BigDecimal GrandTotal;
 
     @OneToMany(mappedBy="shoppingCart", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     @JsonIgnore
@@ -22,20 +23,28 @@ public class ShoppingCart {
     @OneToOne(cascade = CascadeType.ALL)
     private Customer customers;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public double getGrandTotal() {
+    public BigDecimal getGrandTotal() {
         return GrandTotal;
     }
 
-    public void setGrandTotal(double grandTotal) {
+    public void setGrandTotal(BigDecimal grandTotal) {
         GrandTotal = grandTotal;
+    }
+
+    public Customer getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Customer customers) {
+        this.customers = customers;
     }
 
     public List<CartItem> getCartItemList() {

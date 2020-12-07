@@ -8,7 +8,7 @@ import java.security.SecureRandom;
 import java.util.Random;
 
 @Component
-public class SecuriryUtil {
+public class SecurityUtil {
     private static final String SALT = "salt"; // Salt should be protected carefully
 
     @Bean
