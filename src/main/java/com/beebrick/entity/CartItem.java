@@ -12,7 +12,7 @@ public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private int qty;
     private BigDecimal subtotal;
 
@@ -31,8 +31,12 @@ public class CartItem {
     @JoinColumn(name="OrderID")
     private Order order;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public int getQty() {
@@ -43,9 +47,7 @@ public class CartItem {
         this.qty = qty;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+
 
     public BigDecimal getSubtotal() {
         return subtotal;

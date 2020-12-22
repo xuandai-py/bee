@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CartItemServiceImpl implements CartItemService {
@@ -62,5 +63,16 @@ public class CartItemServiceImpl implements CartItemService {
         productToCartItemRepository.save(productToCartItem);
 
         return cartItem;
+    }
+
+    @Override
+    public void removeCartItem(CartItem cartItem) {
+        productToCartItemRepository.deleteByCartItem(cartItem);
+        cartItemRepository.delete(cartItem);
+    }
+
+    @Override
+    public Optional<CartItem> findById(Integer productID) {
+        return cartItemRepository.findById(productID);
     }
 }

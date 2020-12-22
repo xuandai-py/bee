@@ -19,6 +19,8 @@ public interface ProductService {
 
 	Product findByProductID(Integer productID);
 
-
 	public List<Product> getAllRandom();
+
+	Product findOne(Long id);
+
 }

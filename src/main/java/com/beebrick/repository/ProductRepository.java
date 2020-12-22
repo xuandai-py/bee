@@ -14,7 +14,7 @@ import com.beebrick.entity.Product;
 import java.util.List;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
 	@Query(value = "SELECT * FROM products WHERE IsActive = 0", nativeQuery = true)
 	public List<Product> getAll();
@@ -29,4 +29,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
 	@Query(value = "SELECT * from products where ProductID=?1", nativeQuery = true)
 	public Product findByProductID(Integer productID);
+
+	List<Product> findByCategory(String category);
+
+	List<Product> findByProductName(String productName);
 }

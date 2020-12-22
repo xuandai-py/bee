@@ -36,8 +36,9 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Optional<Product> findById(Integer productID) {
-		return productRepository.findById(productID);
+		return Optional.empty();
 	}
+
 
 	@Override
 	public Product findByProductID(Integer productID) {
@@ -47,6 +48,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> getAllRandom() {
 		return productRepository.getAllRamdom();
+	}
+
+	@Override
+	public Product findOne(Long id) {
+		return productRepository.findOne(id);
 	}
 
 

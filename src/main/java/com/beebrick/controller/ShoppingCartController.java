@@ -84,10 +84,10 @@ public class ShoppingCartController {
         return "forward:/shoppingCart/cart";
     }*/
 
-    @RequestMapping("/removeItem")
+   /* @RequestMapping("/removeItem")
     public String removeItem(@RequestParam("id") Integer productID) {
         cartItemService.removeCartItem(cartItemService.findById(id));
 
         return "forward:/shoppingCart/cart";
-    }
+    }   */
 }

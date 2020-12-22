@@ -22,7 +22,7 @@ public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CategoryID")
-	private Integer categoryID;
+	private Long categoryID;
 
 	@NotBlank(message = "Please enter category name")
 	@Column(name = "CategoryName")
@@ -51,13 +51,6 @@ public class Category {
 	@OneToMany(mappedBy = "category")
 	private List<Product> product;
 
-	public Integer getCategoryID() {
-		return categoryID;
-	}
-
-	public void setCategoryID(Integer categoryID) {
-		this.categoryID = categoryID;
-	}
 
 	public String getCategoryName() {
 		return categoryName;

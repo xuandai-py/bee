@@ -27,7 +27,7 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ProductID")
-	private Integer productID;
+	private Long productID;
 
 	@Column(name = "ProductCode")
 	private String productCode;
@@ -86,12 +86,20 @@ public class Product {
 	@JsonIgnore
 	private List<ProductToCartItem> productToCartItemList;
 
-	public Integer getProductID() {
+	public Long getProductID() {
 		return productID;
 	}
 
-	public void setProductID(Integer productID) {
+	public void setProductID(Long productID) {
 		this.productID = productID;
+	}
+
+	public List<ProductToCartItem> getProductToCartItemList() {
+		return productToCartItemList;
+	}
+
+	public void setProductToCartItemList(List<ProductToCartItem> productToCartItemList) {
+		this.productToCartItemList = productToCartItemList;
 	}
 
 	public String getProductCode() {
